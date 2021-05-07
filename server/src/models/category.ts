@@ -2,13 +2,13 @@
 import {Schema, model} from 'mongoose'
 
 const CategorySchema= new Schema({
-    name: [{
+    name: {
     type: String,
     required: true
-    }],
+    },
     tasks:[{
         type: Schema.Types.ObjectId,
-        ref: "Task",
+        ref: 'Task',
     }],
    
     checked:{

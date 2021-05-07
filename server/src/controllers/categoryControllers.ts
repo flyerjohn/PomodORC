@@ -11,6 +11,14 @@ export default class CategoryControllers{
             return res.status(400).json(erro.menssage);
         }
     }
+    async getSpecificCategory (req: Request , res: Response) :Promise <Response>{
+        try{
+            const category = await Category.find({'_id' : req.params._id});
+            return res.status(200).json(category);
+        }catch(erro){
+            return res.status(400).json(erro.menssage);
+        }
+    }
     
     async createCategory (req: Request, res: Response) :Promise <Response>{
         try {

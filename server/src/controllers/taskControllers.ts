@@ -11,6 +11,14 @@ export default class TaskControllers{
             return res.status(400).json(error.message);
         }
     }
+    async getSpecificTask (req: Request ,res: Response) :Promise <Response>{
+        try{
+            const tasks = await Tasks.find({'_id' : req.params._id});
+            return res.status(200).json(tasks);
+        }catch(error){
+            return res.status(400).json(error.message);
+        }
+    }
 
     async createTask (req: Request, res: Response) :Promise <Response>{
         try {

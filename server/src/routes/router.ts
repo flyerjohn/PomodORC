@@ -11,6 +11,9 @@ const taskController = new TaskControllers();
 router.get("/tasks",(req: Request, res: Response) => {
     taskController.getTasks(req,res);
 });
+router.get("/tasks/:_id",(req: Request, res: Response) => {
+    taskController.getSpecificTask(req,res);
+});
 
 router.post("/task",(req: Request,res: Response) => {
     taskController.createTask(req,res);
@@ -27,7 +30,9 @@ router.delete("/tasks/:_id",(req: Request, res: Response)=>{
 router.get("/categories",(req: Request, res: Response) => {
     categoryController.getCategorys(req,res);
 });
-
+router.get("/categories/:_id",(req: Request, res: Response) => {
+    categoryController.getSpecificCategory(req,res);
+});
 router.post("/category",(req: Request, res: Response)=> {
     categoryController.createCategory(req,res)
 });

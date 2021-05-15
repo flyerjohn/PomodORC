@@ -1,0 +1,133 @@
+.container{
+    background-color: white;
+    display: flex;
+    flex-direction: row;
+
+    width: 100%;
+    height: 100vh;
+
+    color: #E5E5E5;
+}
+
+/*============= menu, parte esquerda=============*/
+
+.menu{
+    background-color: #BF4226;
+
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items:center;
+    
+    width: 25%;
+    height: 100vh;
+
+    font-size: 24px;
+    font-weight: 500;
+}
+
+.espaçamento-logo{
+    padding: 14px 0px;
+}
+
+.espaçamento-logo img{  /*img responsiva*/
+    max-width: 100%;
+    height: auto;
+}
+
+/*==formatação link==*/
+
+.rotas:link{ 
+    color: #E5E5E5;     /*== para links nao visitados ==*/
+}
+
+.rotas:visited{
+    color: #741c08;     /*== para links visitados ==*/
+}
+
+.rotas:hover{
+    color: #DF6043;     /*== quando o cursor do mouse estiver sobre o link ==*/
+}
+
+.rotas:active{
+    color: #0E1826;     /*== quando o link for clicado ==*/
+}
+
+.rotas{
+    text-decoration: none;
+}
+
+/*== final da formatação link==*/
+
+@media (max-width: 600px){
+    .menu{
+        font-size: 10px;
+    }
+}
+
+@media (max-width: 320px){
+    .menu{
+        font-size: 8px;
+    }
+}
+
+@media (min-width: 600px) and (max-width: 850px){
+    .menu{
+        font-size: 16px;
+    }
+}
+
+
+/*=============conteudo, parte direita=============*/
+
+.content{
+    width: 75%;
+    height: 100vh;
+
+    background-color: #0E1826; 
+    
+}
+
+.header-content{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+
+    font-size: 24px;
+    font-weight: 500;
+
+    margin: 20px;
+}
+
+.content-app{
+    margin: 25px;
+}
+
+.content-app p{
+    color: #BF4226;
+    font-size: 24px;
+    font-weight: 500;
+    letter-spacing: 1px;
+}
+
+@media (max-width: 600px){
+    .content-app{
+        margin: 20px;
+    }
+    .content-app p {
+        font-size: 13px;
+    }
+    .header-content {
+        font-size: 13px;
+    }
+}
+
+@media (min-width: 600px) and (max-width: 850px){
+    .content-app p{
+        font-size: 18px;
+    }
+    .header-content {
+        font-size: 18px;
+    }
+}

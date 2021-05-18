@@ -75,7 +75,7 @@ const Carrosel = () => {
             }) 
             }
         
-
+         
             
         </Slider>
         

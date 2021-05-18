@@ -13,7 +13,7 @@ interface User {
 const Aplicaçao: React.FC = () => {
 
     const [user, setUser] = useState<User>();
-    let [counter, setCounter] = useState();
+    let [counter, setCounter] = useState(1500);
 
     async function loadData() {
         /*  
@@ -40,6 +40,19 @@ const Aplicaçao: React.FC = () => {
             loadData();
         }, []
     );
+    const [info, setInfo] = useState('');
+
+    const createTask = async () =>{
+        try {
+            await api.post('task',{
+                name: info
+            });           
+            window.location.reload();
+        } catch (error) {
+            console.log(error.message);
+        }
+    }
+    
 
     return (
         <div className='container' onClick={() => console.log(user)}>
@@ -71,10 +84,17 @@ const Aplicaçao: React.FC = () => {
                     <br></br>
                     <Carrosel />
                     <br></br>
-
                     <button onClick={() => startTimer (counter)}>cdcasdca</button>
                     <p>{counter}</p>
                 </div>
+           
+            <div>
+            <input onChange = { e => {setInfo(e.target.value)} }/>
+            
+            <button onClick= {()=>{createTask()}} >
+            GO
+            </button>
+            </div>
             </div>
         </div>
     );

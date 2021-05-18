@@ -29,6 +29,19 @@ const Aplicaçao: React.FC = () => {
             loadData();
         }, []
     );
+    const [info, setInfo] = useState('');
+
+    const createTask = async () =>{
+        try {
+            await api.post('task',{
+                name: info
+            });           
+            window.location.reload();
+        } catch (error) {
+            console.log(error.message);
+        }
+    }
+    
 
     return (
         <div className='container' onClick={() => console.log(user)}>
@@ -59,7 +72,16 @@ const Aplicaçao: React.FC = () => {
                     <p>LISTA</p>
                     <br></br>
                     <Carrosel />
+                    
                 </div>
+           
+            <div>
+            <input onChange = { e => {setInfo(e.target.value)} }/>
+            
+            <button onClick= {()=>{createTask()}} >
+            GO
+            </button>
+            </div>
             </div>
         </div>
     );

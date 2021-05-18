@@ -2,7 +2,7 @@
 import {Schema, model} from 'mongoose'
 
 const TaskSchema= new Schema({
-    task:{
+    name:{
         type: String,
         required: true,
     },

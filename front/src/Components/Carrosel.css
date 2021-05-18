@@ -8,7 +8,7 @@
 .card{
     width: 100%;
     height: 130px;  /*= tamanho heigth dos cards =*/
-    border-radius: 10px;
+    border-radius: 29px;
     overflow: hidden;
     cursor: pointer;
     position: relative;
@@ -21,9 +21,8 @@
     width: 100%;
     height: 100vh;
     z-index:2;
-    background: linear-gradient(180deg, #BF4226 0%, #AD2D10 100%);
+    background: linear-gradient(180deg, #BF4226 100%, #AD2D10 100%);
     transition: 6s;
-
     padding: 10px; /*= tamanho width dos cards =*/
 
 }

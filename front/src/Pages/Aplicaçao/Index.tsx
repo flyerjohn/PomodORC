@@ -13,6 +13,7 @@ interface User {
 const Aplicaçao: React.FC = () => {
 
     const [user, setUser] = useState<User>();
+    let [counter, setCounter] = useState();
 
     async function loadData() {
         /*  
@@ -25,14 +26,12 @@ const Aplicaçao: React.FC = () => {
         */
     }
 
-    function startTimer() {
-
-        let counter: number = 1500;
+    function startTimer(counter:number) {
 
         let intervalId = setInterval(() => {
-            counter -= 1;
+            setCounter(counter--);
             console.log(counter)
-            if(counter === 0) clearInterval(intervalId)
+            if(counter === -1) clearInterval(intervalId)
         }, 1000)
     }
 
@@ -73,7 +72,8 @@ const Aplicaçao: React.FC = () => {
                     <Carrosel />
                     <br></br>
 
-                    <button onClick={() => startTimer ()}>cdcasdca</button>
+                    <button onClick={() => startTimer (counter)}>cdcasdca</button>
+                    <p>{counter}</p>
                 </div>
             </div>
         </div>

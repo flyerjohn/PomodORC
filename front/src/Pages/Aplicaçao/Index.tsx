@@ -12,7 +12,8 @@ interface User {
 
 const Aplicaçao: React.FC = () => {
 
-    const [user, setUser] = useState<User>();
+
+    const [category, setCategory] = useState([]);
 
     async function loadData() {
         /*  
@@ -25,43 +26,46 @@ const Aplicaçao: React.FC = () => {
         */
     }
 
-    function startTimer() {
+    
 
-        let counter: number = 1500;
-
-        let intervalId = setInterval(() => {
-            counter -= 1;
-            console.log(counter)
-            if(counter === 0) clearInterval(intervalId)
-        }, 1000)
-    }
-
-    useEffect (
+    useEffect(
         () => {
             loadData();
         }, []
     );
     const [info, setInfo] = useState('');
 
-    const createTask = async () =>{
+    const createTask = async (_id: string) => {
         try {
-            await api.post('task',{
+            await api.post(`task/${_id}`, {
                 name: info
-            });           
+            });
             window.location.reload();
         } catch (error) {
             console.log(error.message);
         }
     }
-    
+    const getCategory = async () => {
+        try {
+            const _category = await api.get('categories');
+            setCategory(_category.data);
+        } catch (error) {
+            console.log(error.message);
+        }
+    }
+
+    useEffect(() => {
+        getCategory();
+    }, []);
+
 
     return (
-        <div className='container' onClick={() => console.log(user)}>
-            
+        <div className='container'>
+
             <div className='menu'>   {/* lado esquerdo */}
                 <picture className='espaçamento-logo'>
-                    <img src="../Imagens/POMODORC 1.png" alt="LOGO"/>
-                        {/* imagem encontrada na pasta public */}
+                    <img src="../Imagens/POMODORC 1.png" alt="LOGO" />
+                    {/* imagem encontrada na pasta public */}
                 </picture>
 
                 <p>LISTA DE TAREFAS</p>
@@ -69,7 +73,7 @@ const Aplicaçao: React.FC = () => {
                 <p>AJUSTES</p>
                 <br></br>
 
-                <Link className='rotas' to="/">  
+                <Link className='rotas' to="/">
                     SAIR    {/* saida direcionada para o login */}
                 </Link>
 
@@ -77,29 +81,45 @@ const Aplicaçao: React.FC = () => {
 
             <div className='content'>   {/* lado direito */}
                 <header className='header-content'>
-                    Olá {user?.name}
+                    Olá Pessoa
                 </header>
 
                 <div className='content-app'>
-                    <p>LISTA</p>
-                    <br></br>
-                    <Carrosel />
-<<<<<<< HEAD
+                   
                     
-=======
-                    <br></br>
+                    {
+            category?.map(({_id,name,tasks})=>{
+                return (
+                    <> 
+                    <h1> {name} </h1> 
+                    <input onChange={e => { setInfo(e.target.value) }} />
+                    <button onClick={() => {createTask(_id) }} > ahhh</button>
+                    <Carrosel taskList={tasks} />
+                    </>
+                );
+            }) 
+            }
+                
+                    
 
-                    <button onClick={() => startTimer ()}>cdcasdca</button>
->>>>>>> 1dfe1390c9d85dba90cb1b7bd5c451c2737d2603
+
+                    
+                    <br/>
+
+                   
                 </div>
-           
-            <div>
-            <input onChange = { e => {setInfo(e.target.value)} }/>
-            
-            <button onClick= {()=>{createTask()}} >
-            GO
-            </button>
-            </div>
+
+                <div>
+
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                   
+
+                    
+                </div>
             </div>
         </div>
     );

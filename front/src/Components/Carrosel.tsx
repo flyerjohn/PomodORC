@@ -7,12 +7,20 @@ import api from '../services/api';
 
 
 
-const Carrosel = () => {
+interface ITask{
+    name: string
+    checked: boolean
+    _id: string 
+}
+interface ITaskList {
+    taskList: Array<ITask>;
+}
+const Carrosel = ({taskList} : ITaskList) => {
     const [tasks, setTasks] = useState([]);
 
     let settings = {
         dot:true,
-        infinite:true,
+        infinite:false,
         speed:600,
         slidesToShow: 3,
         slidesToScroll: 1,
@@ -23,7 +31,7 @@ const Carrosel = () => {
               settings: {
                 slidesToShow: 3,
                 slidesToScroll: 3,
-                infinite: true,
+                infinite: false,
                 dots: true
               }
             },
@@ -52,6 +60,22 @@ const Carrosel = () => {
             console.log(error.message);
         }
     }
+    const updateTasks  = async (_id: string) =>{
+        try {
+             await api.put(`tasks/${_id}`);            
+            window.location.reload();
+        } catch (error) {
+            console.log(error.message);
+        }
+    }
+    const deleteTask = async (_id: string) =>{
+        try { 
+            await api.delete(`tasks/${_id}`);           
+            window.location.reload();
+        } catch (error) {
+            console.log(error.message);
+        }
+    }
 
     useEffect(() => {
         getTasks(); 
@@ -59,16 +83,17 @@ const Carrosel = () => {
     return (
         <Slider {...settings}>
             {
-            tasks?.map(({_id,name})=>{
+            taskList?.map(({_id,name})=>{
                 return (
-                    <div className='card-wrapper' onClick = { ()=> {console.log(tasks)}}>
+                    <div className='card-wrapper' >
                         <div className='card'>
                             <div className='card-task'>
                             <h2>
                                {name}
                              </h2>
-
+                             <button onClick= {()=>deleteTask(_id)}> Apagar o bang</button>
                             </div>
+                            
                         </div>
                     </div>
                 );

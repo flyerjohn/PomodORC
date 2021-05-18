@@ -15,7 +15,7 @@ router.get("/tasks/:_id",(req: Request, res: Response) => {
     taskController.getSpecificTask(req,res);
 });
 
-router.post("/task",(req: Request,res: Response) => {
+router.post("/task/:_id",(req: Request,res: Response) => {
     taskController.createTask(req,res);
 });
 

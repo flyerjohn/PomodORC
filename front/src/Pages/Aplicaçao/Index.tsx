@@ -3,6 +3,7 @@ import './style.css';
 import api from '../../services/api';
 import { Link } from 'react-router-dom';
 
+
 import Carrosel from '../../Components/Carrosel';
 
 interface User {
@@ -14,14 +15,25 @@ const Aplicaçao: React.FC = () => {
     const [user, setUser] = useState<User>();
 
     async function loadData() {
-        
+        /*  
         try {
-            const response = await api.get('users');
+            const response = await api.get('');
             setUser (response.data[0]);
         } catch (error) {
             
         }
-      
+        */
+    }
+
+    function startTimer() {
+
+        let counter: number = 1500;
+
+        let intervalId = setInterval(() => {
+            counter -= 1;
+            console.log(counter)
+            if(counter === 0) clearInterval(intervalId)
+        }, 1000)
     }
 
     useEffect (
@@ -45,7 +57,7 @@ const Aplicaçao: React.FC = () => {
                 <br></br>
 
                 <Link className='rotas' to="/">  
-                    SAIR    {/* saida direciona para o login */}
+                    SAIR    {/* saida direcionada para o login */}
                 </Link>
 
             </div>
@@ -59,6 +71,9 @@ const Aplicaçao: React.FC = () => {
                     <p>LISTA</p>
                     <br></br>
                     <Carrosel />
+                    <br></br>
+
+                    <button onClick={() => startTimer ()}>cdcasdca</button>
                 </div>
             </div>
         </div>

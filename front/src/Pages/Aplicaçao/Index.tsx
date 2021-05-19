@@ -3,7 +3,8 @@ import './style.css';
 import api from '../../services/api';
 import Carrosel from '../../Components/Carrosel';
 import { RiCloseLine } from "react-icons/ri";
-import { FiEdit } from "react-icons/fi";
+import Lista from '../../Components/Lista';
+
 
 
 const Aplicaçao: React.FC = () => {
@@ -16,10 +17,14 @@ const Aplicaçao: React.FC = () => {
     const [categoryValue, setCategoryValue] = useState<string>('');
     const [taskName, setTaskName] = useState('');
     const [categoryName, setCategoryName] = useState('');
+    const [categoryId, setCategoryId] = useState('');
 
 
     function onChangeSelect(value:string){
         setCategoryValue(value);
+    }
+    function onChangeCategoryId(value:string){
+     setCategoryId(value);
     }
 
     const createTask = async (_id: string) => {
@@ -52,9 +57,9 @@ const Aplicaçao: React.FC = () => {
             console.log(error.message);
         }
     }
-    const updateCategory = async (name:string) => {
+    const updateCategory = async (name:string, _id: string) => {
         try {
-            await api.put("/category", {
+            await api.put(`/categories/${_id}`, {
                 name:name
             });
             window.location.reload();
@@ -70,7 +75,7 @@ const Aplicaçao: React.FC = () => {
             console.log(error.message);
         }
     }
-
+   
     useEffect(() => {
         getCategory();
     }, []);
@@ -78,7 +83,7 @@ const Aplicaçao: React.FC = () => {
 
     return (
         <div className='container'>
-
+            <div className= "spacer"/>
             <div className='menu'>   {/* lado esquerdo */}
                 <picture className='espaçamento-logo'>
                     <img src="../Imagens/POMODORC 1.png" alt="LOGO" />
@@ -103,15 +108,8 @@ const Aplicaçao: React.FC = () => {
 
                     {
                         category?.map(({ _id, name, tasks }) => {
-                            return (
-                                <>  
-                                <div className="titleContainer">
-                                    <h1 className="listTitle"> {name} </h1>
-                                    <FiEdit className= "editListIcon" onClick= {() => {setEditCategoryModal (true);}}/>
-                                </div>
-                                    <Carrosel taskList={tasks} />
-                               
-                                </>
+                            return (                                 
+                                <Lista name= {name} tasks={tasks} setEditCategoryModal={setEditCategoryModal}  setCategoryId={()=>{onChangeCategoryId(_id)}}/>
                             );
                         })
                     }
@@ -162,7 +160,7 @@ const Aplicaçao: React.FC = () => {
                             <h2>Nome:</h2>
                             <input onChange= { e => {setCategoryName(e.target.value)}}/>
                        </div>
-                       <button onClick={()=> updateCategory(categoryName)}>CRIAR</button>
+                       <button onClick={()=> updateCategory(categoryName,categoryId)}>CRIAR</button>
                        <button >apagar</button>
                    </div> : null}
                 </div>

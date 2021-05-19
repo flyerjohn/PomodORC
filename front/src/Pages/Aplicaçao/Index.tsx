@@ -2,6 +2,8 @@ import React, { useState, useEffect, BaseSyntheticEvent } from 'react';
 import './style.css';
 import api from '../../services/api';
 import Carrosel from '../../Components/Carrosel';
+import { RiCloseLine } from "react-icons/ri";
+import { FiEdit } from "react-icons/fi";
 
 
 const Aplicaçao: React.FC = () => {
@@ -10,7 +12,7 @@ const Aplicaçao: React.FC = () => {
     const [category, setCategory] = useState([]);
     const [taskModal, setTaskModal] = useState(false);
     const [categoryModal, setCategoryModal] = useState(false);
-    const [deleteCategoryModal, setDeleteCategoryModal] = useState(false);
+    const [editCategoryModal, setEditCategoryModal] = useState(false);
     const [categoryValue, setCategoryValue] = useState<string>('');
     const [taskName, setTaskName] = useState('');
     const [categoryName, setCategoryName] = useState('');
@@ -50,7 +52,16 @@ const Aplicaçao: React.FC = () => {
             console.log(error.message);
         }
     }
-
+    const updateCategory = async (name:string) => {
+        try {
+            await api.put("/category", {
+                name:name
+            });
+            window.location.reload();
+        } catch (error) {
+            console.log(error.message);
+        }
+    }
     const deleteCategory = async (_id:string) => {
         try {
             await api.delete(`/categories/${_id}`);
@@ -74,8 +85,8 @@ const Aplicaçao: React.FC = () => {
                     {/* imagem encontrada na pasta public */}
                 </picture>
                 <div className="menubar">
-                    <button>LISTA DE TAREFAS</button>
-                    <button onClick= {() => {setDeleteCategoryModal (true); } }>EDITAR CATEGORIA</button>
+                    
+                    
                     <button onClick= {() => {setTaskModal (true); } }>CRIAR TAREFA</button>
                     <button onClick= {() => {setCategoryModal (true); } }>CRIAR LISTA</button>
                     <button>AJUSTES</button>
@@ -93,9 +104,13 @@ const Aplicaçao: React.FC = () => {
                     {
                         category?.map(({ _id, name, tasks }) => {
                             return (
-                                <>
-                                    <h1> {name} </h1>
+                                <>  
+                                <div className="titleContainer">
+                                    <h1 className="listTitle"> {name} </h1>
+                                    <FiEdit className= "editListIcon" onClick= {() => {setEditCategoryModal (true);}}/>
+                                </div>
                                     <Carrosel taskList={tasks} />
+                               
                                 </>
                             );
                         })
@@ -105,6 +120,7 @@ const Aplicaçao: React.FC = () => {
                    {taskModal ? 
                    <div className ="taskModal">
                        <h1>CRIAR TAREFA</h1>
+                       <RiCloseLine className= "closeTaskIcon" onClick= {()=> setTaskModal(false)}/>
                        <div className="form-item">
                             <h2>Nome:</h2><input onChange={e => { setTaskName(e.target.value) }} />
                        </div>
@@ -124,28 +140,31 @@ const Aplicaçao: React.FC = () => {
                         
                            
                        </select>
-                       <button onClick={() => {createTask(categoryValue)}}>CRIAR</button>
+                       <button className="createButton" onClick={() => {createTask(categoryValue)}}>CRIAR</button>
                    </div> : null}
 
 
                    {categoryModal ? 
                    <div className ="taskModal">
                        <h1>CRIAR LISTA</h1>
+                       <RiCloseLine className= "closeCategoryIcon" onClick= {()=> setCategoryModal(false)}/>
                        <div className="form-item">
                             <h2>Nome:</h2><input onChange={e => { setCategoryName(e.target.value) }} />
                        </div>
                        <button onClick={() => {createCategory(categoryName)}}>CRIAR</button>
                    </div> : null}
 
-                   {/* {deleteCategoryModal ? 
+                   {editCategoryModal ? 
                    <div className ="taskModal">
                        <h1>EDITAR LISTA</h1>
+                       <RiCloseLine className= "closeCategoryIcon" onClick= {()=> setEditCategoryModal(false)}/>
                        <div className="form-item">
-                            <h2>Nome:</h2><input/>
+                            <h2>Nome:</h2>
+                            <input onChange= { e => {setCategoryName(e.target.value)}}/>
                        </div>
-                       <button>CRIAR</button>
+                       <button onClick={()=> updateCategory(categoryName)}>CRIAR</button>
                        <button >apagar</button>
-                   </div> : null} */}
+                   </div> : null}
                 </div>
             </div>
         </div>

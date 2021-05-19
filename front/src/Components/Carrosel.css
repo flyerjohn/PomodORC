@@ -31,3 +31,20 @@
         transform: translateY( -1.5px );
         transition: all .2s;
 }
+
+.timer-container{
+    color: #E5E5E5;
+    display: flex;
+    letter-spacing: 3px;
+    font-size: 1.5rem;
+}
+
+.timer-container span{
+    position: relative;
+    top: 5px;
+}
+
+.timer-text{
+    margin: 0;
+}
+

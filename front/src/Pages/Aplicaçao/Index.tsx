@@ -2,8 +2,6 @@ import React, { useState, useEffect } from 'react';
 import './style.css';
 import api from '../../services/api';
 import { Link } from 'react-router-dom';
-
-
 import Carrosel from '../../Components/Carrosel';
 
 interface User {
@@ -13,7 +11,6 @@ interface User {
 const Aplicaçao: React.FC = () => {
 
     const [user, setUser] = useState<User>();
-    let [counter, setCounter] = useState(1500);
 
     async function loadData() {
         /*  
@@ -24,15 +21,6 @@ const Aplicaçao: React.FC = () => {
             
         }
         */
-    }
-
-    function startTimer(counter:number) {
-
-        let intervalId = setInterval(() => {
-            setCounter(counter--);
-            console.log(counter)
-            if(counter === -1) clearInterval(intervalId)
-        }, 1000)
     }
 
     useEffect (
@@ -84,8 +72,6 @@ const Aplicaçao: React.FC = () => {
                     <br></br>
                     <Carrosel />
                     <br></br>
-                    <button onClick={() => startTimer (counter)}>cdcasdca</button>
-                    <p>{counter}</p>
                 </div>
            
             <div>

@@ -5,14 +5,14 @@ import "slick-carousel/slick/slick-theme.css";
 import '../Components/Carrosel.css';
 import api from '../services/api';
 
-
+import TaskCard from './Helper/TaskCard';
 
 const Carrosel = () => {
     const [tasks, setTasks] = useState([]);
 
     let settings = {
         dot:true,
-        infinite:true,
+        infinite:false,
         speed:600,
         slidesToShow: 3,
         slidesToScroll: 1,
@@ -53,6 +53,7 @@ const Carrosel = () => {
         }
     }
 
+
     useEffect(() => {
         getTasks(); 
     },[]);
@@ -61,16 +62,7 @@ const Carrosel = () => {
             {
             tasks?.map(({_id,name})=>{
                 return (
-                    <div className='card-wrapper' onClick = { ()=> {console.log(tasks)}}>
-                        <div className='card'>
-                            <div className='card-task'>
-                            <h2>
-                               {name}
-                             </h2>
-
-                            </div>
-                        </div>
-                    </div>
+                    <TaskCard id={_id} name={name}/>
                 );
             }) 
             }

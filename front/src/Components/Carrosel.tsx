@@ -88,9 +88,9 @@ const Carrosel = ({taskList} : ITaskList) => {
                     <div className='card-wrapper' >
                         <div className='card'>
                             <div className='card-task'>
-                            <h2>
-                               {name}
-                             </h2>
+                            <div className="card-title">
+                                <h2>{name}</h2>
+                            </div>
                              <button onClick= {()=>deleteTask(_id)}> Apagar o bang</button>
                             </div>
                             

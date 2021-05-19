@@ -1,6 +1,7 @@
 import React from 'react';
 import { FiEdit } from "react-icons/fi";
-import Carrosel from './Carrosel';
+import Carrosel from '../../Components/Carrosel';
+import './../../Pages/Aplicaçao/style.css';
 
 interface ITask{
     name: string
@@ -11,7 +12,6 @@ interface ITask{
 
 const Lista = ({name, tasks, setEditCategoryModal, setCategoryId}:{
     name: string,
-
     tasks: ITask[],
     setEditCategoryModal: Function,
     setCategoryId: Function

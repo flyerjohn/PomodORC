@@ -24,8 +24,19 @@
     z-index:2;
     background: linear-gradient(180deg, #BF4226 100%, #AD2D10 100%);
     transition: 6s;
-    padding: 10px; /*= tamanho width dos cards =*/
+    padding: 10px;
+}
 
+.card-title{
+    margin-top:2%;
+    margin-left: 2%;
+}
+
+.card-title h2{
+    text-transform:uppercase;
+    font-family: 'Montserrat', sans-serif;
+    font-weight:lighter;
+    font-size: 3vh;
 }
 
 .card:hover{    /*= animaçao que sobe o card =*/

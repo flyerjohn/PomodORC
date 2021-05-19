@@ -158,8 +158,9 @@
 }
 
 .taskModal h1{
-    font-size:28px;
+    font-size:4vh;
     color:#BF4226;
+    margin-bottom: 5%;
 }
 
 .taskModal h2{
@@ -173,7 +174,7 @@
     color:#fff;
     padding:1vh;
     border-radius: 8px;
-    
+    cursor:pointer;
 }
 .titleContainer{
     display: flex;
@@ -182,6 +183,10 @@
 .listTitle{
     padding-top: 3vh;
     padding-bottom: 2vh;
+    color:#BF4226;
+    font-weight: bold;
+    text-transform:uppercase;
+    font-size: 1.6rem;
 }
 .editListIcon{
     font-size: 1.2rem;
@@ -235,4 +240,22 @@
 .menubar button:hover{
     opacity:1;
     cursor: pointer;
+}
+.trash-item{
+    cursor: pointer;
+    align-self:flex-end;
+    margin-bottom: 1%;
+    margin-right: 4%;
+    font-size:1.3rem;
+}
+
+.input-item{
+    margin-top: 5%;
+    padding-left: 7%;
+    width: 100%;
+    height: 35%;
+    background-color: #18283f;
+    border:#000;
+    color:#fff;
+    margin-bottom: 50%;
 }

@@ -1,14 +1,12 @@
 import React, { useState, useEffect, BaseSyntheticEvent } from 'react';
 import './style.css';
 import api from '../../services/api';
-import Carrosel from '../../Components/Carrosel';
-import { RiCloseLine } from "react-icons/ri";
-import Lista from '../../Components/Lista';
-
-
+import Lista from '../../Components/Modal/Lista';
+import TaskModal from '../../Components/Modal/TaskModal';
+import CategoryModal from '../../Components/Modal/CategoryModal';
+import EditCategoryModal from '../../Components/Modal/EditCategoryModal';
 
 const Aplicaçao: React.FC = () => {
-
 
     const [category, setCategory] = useState([]);
     const [taskModal, setTaskModal] = useState(false);
@@ -23,6 +21,7 @@ const Aplicaçao: React.FC = () => {
     function onChangeSelect(value:string){
         setCategoryValue(value);
     }
+
     function onChangeCategoryId(value:string){
      setCategoryId(value);
     }
@@ -57,6 +56,7 @@ const Aplicaçao: React.FC = () => {
             console.log(error.message);
         }
     }
+
     const updateCategory = async (name:string, _id: string) => {
         try {
             await api.put(`/categories/${_id}`, {
@@ -67,6 +67,7 @@ const Aplicaçao: React.FC = () => {
             console.log(error.message);
         }
     }
+
     const deleteCategory = async (_id:string) => {
         try {
             await api.delete(`/categories/${_id}`);
@@ -84,28 +85,25 @@ const Aplicaçao: React.FC = () => {
     return (
         <div className='container'>
             <div className= "spacer"/>
-            <div className='menu'>   {/* lado esquerdo */}
+            <div className='menu'>  
                 <picture className='espaçamento-logo'>
                     <img src="../Imagens/POMODORC 1.png" alt="LOGO" />
-                    {/* imagem encontrada na pasta public */}
                 </picture>
+
                 <div className="menubar">
-                    
-                    
                     <button onClick= {() => {setTaskModal (true); } }>CRIAR TAREFA</button>
                     <button onClick= {() => {setCategoryModal (true); } }>CRIAR LISTA</button>
                     <button>AJUSTES</button>
                 </div>
+
             </div>
 
-            <div className='content'>   {/* lado direito */}
+            <div className='content'>  
                 <header className='header-content'>
-                    Olá Pessoa
+                    Olá Pessoa!
                 </header>
 
                 <div className='content-app'>
-
-
                     {
                         category?.map(({ _id, name, tasks }) => {
                             return (                                 
@@ -114,55 +112,11 @@ const Aplicaçao: React.FC = () => {
                         })
                     }
                    
+                   {taskModal ? <TaskModal name={categoryName} _id={categoryId} categoryValue={categoryValue} category={category} setTaskModal={setTaskModal} setTaskName={setTaskName} createTask={createTask} onChangeSelect={onChangeSelect} /> : null}
 
-                   {taskModal ? 
-                   <div className ="taskModal">
-                       <h1>CRIAR TAREFA</h1>
-                       <RiCloseLine className= "closeTaskIcon" onClick= {()=> setTaskModal(false)}/>
-                       <div className="form-item">
-                            <h2>Nome:</h2><input onChange={e => { setTaskName(e.target.value) }} />
-                       </div>
-                       
-                       <h2>Categoria:</h2>
-                       <select value={categoryValue} onChange={(e:BaseSyntheticEvent) => onChangeSelect(e.target.value)}>
-                       <option></option>
-                            {
-                                category?.map(({ _id, name}) => {
-                                    return (
-                                        <>
-                                            <option value={_id}>{name}</option>
-                                        </>
-                                    );
-                                })
-                            }
-                        
-                           
-                       </select>
-                       <button className="createButton" onClick={() => {createTask(categoryValue)}}>CRIAR</button>
-                   </div> : null}
+                   {categoryModal ? <CategoryModal setCategoryModal={setCategoryModal} categoryName={categoryName} setCategoryName={setCategoryName} createCategory={createCategory} /> : null}
 
-
-                   {categoryModal ? 
-                   <div className ="taskModal">
-                       <h1>CRIAR LISTA</h1>
-                       <RiCloseLine className= "closeCategoryIcon" onClick= {()=> setCategoryModal(false)}/>
-                       <div className="form-item">
-                            <h2>Nome:</h2><input onChange={e => { setCategoryName(e.target.value) }} />
-                       </div>
-                       <button onClick={() => {createCategory(categoryName)}}>CRIAR</button>
-                   </div> : null}
-
-                   {editCategoryModal ? 
-                   <div className ="taskModal">
-                       <h1>EDITAR LISTA</h1>
-                       <RiCloseLine className= "closeCategoryIcon" onClick= {()=> setEditCategoryModal(false)}/>
-                       <div className="form-item">
-                            <h2>Nome:</h2>
-                            <input onChange= { e => {setCategoryName(e.target.value)}}/>
-                       </div>
-                       <button onClick={()=> updateCategory(categoryName,categoryId)}>CRIAR</button>
-                       <button >apagar</button>
-                   </div> : null}
+                   {editCategoryModal ? <EditCategoryModal categoryId={categoryId} categoryName={categoryName} setCategoryName={setCategoryName} updateCategory={updateCategory} deleteCategory={deleteCategory} setEditCategoryModal={setEditCategoryModal} />: null}
                 </div>
             </div>
         </div>

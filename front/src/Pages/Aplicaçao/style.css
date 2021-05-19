@@ -1,8 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap');
+
 .container{
     background-color: white;
     display: flex;
     flex-direction: row;
-
+    font-family: 'Roboto', sans-serif;
     width: 100%;
     height: 100vh;
 
@@ -132,15 +134,60 @@
     }
 }
 .taskModal{
-
-
- background-color:linear-gradient(#0E1826 0% , #0a1625 100%) ;
- justify-content: center;
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
- top: 25%;
-  border-radius: 29px;
- height: 50vh;
- width: 100vh;
-
+    
+    background:linear-gradient(180deg, #18273D 5%, #111d2e 100%);
+    font-family: 'Roboto', sans-serif;
+    border-color:#0E1826;
+    border-style: solid;
+    justify-content: space-around;
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    top: 25%;
+    border-radius: 29px;
+    height: 35%;
+    width: 40%;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top:1.5rem;
 }
+
+.taskModal h1{
+    font-size:28px;
+    color:#BF4226;
+}
+
+.taskModal h2{
+    font-size:18px;
+    color:#fff;
+}
+
+.taskModal button{
+    background-color: #BF4226;
+    border:none;
+    color:#fff;
+    padding:1vh;
+    border-radius: 8px;
+    
+}
+
+
+.menubar{
+    display: flex;
+    flex-direction: column;
+}
+
+.menubar button{
+    padding: 0.8rem;
+    align-items: center;
+    background: none;
+    border:none;
+    font-size: 1.2rem;
+    color: #fff;
+    opacity: 0.6; transition: 0.3s;
+}
+
+.menubar button:hover{
+    opacity:1;
+}
+

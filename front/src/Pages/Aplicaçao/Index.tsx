@@ -1,55 +1,60 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, BaseSyntheticEvent } from 'react';
 import './style.css';
 import api from '../../services/api';
-import { Link } from 'react-router-dom';
-
-
 import Carrosel from '../../Components/Carrosel';
 
-interface User {
-    name: string;
-}
 
 const Aplicaçao: React.FC = () => {
 
 
     const [category, setCategory] = useState([]);
-    var [taskModal, setTaskModal] = useState(false);
+    const [taskModal, setTaskModal] = useState(false);
+    const [categoryModal, setCategoryModal] = useState(false);
+    const [deleteCategoryModal, setDeleteCategoryModal] = useState(false);
+    const [categoryValue, setCategoryValue] = useState<string>('');
+    const [taskName, setTaskName] = useState('');
+    const [categoryName, setCategoryName] = useState('');
 
-    async function loadData() {
-        /*  
-        try {
-            const response = await api.get('');
-            setUser (response.data[0]);
-        } catch (error) {
-            
-        }
-        */
+
+    function onChangeSelect(value:string){
+        setCategoryValue(value);
     }
-
-
-
-    useEffect(
-        () => {
-            loadData();
-        }, []
-    );
-    const [info, setInfo] = useState('');
 
     const createTask = async (_id: string) => {
         try {
             await api.post(`task/${_id}`, {
-                name: info
+                name: taskName
             });
             window.location.reload();
         } catch (error) {
             console.log(error.message);
         }
     }
+
     const getCategory = async () => {
         try {
             const _category = await api.get('categories');
             setCategory(_category.data);
+        } catch (error) {
+            console.log(error.message);
+        }
+    }
+
+    const createCategory = async (name:string) => {
+        try {
+            await api.post("/category", {
+                name:name
+            });
+            window.location.reload();
+        } catch (error) {
+            console.log(error.message);
+        }
+    }
+
+    const deleteCategory = async (_id:string) => {
+        try {
+            await api.delete(`/categories/${_id}`);
+            window.location.reload();
         } catch (error) {
             console.log(error.message);
         }
@@ -68,16 +73,13 @@ const Aplicaçao: React.FC = () => {
                     <img src="../Imagens/POMODORC 1.png" alt="LOGO" />
                     {/* imagem encontrada na pasta public */}
                 </picture>
-
-                <p>LISTA DE TAREFAS</p>
-                <br></br>
-                <p>AJUSTES</p>
-                <br></br>
-
-                <Link className='rotas' to="/">
-                    SAIR    {/* saida direcionada para o login */}
-                </Link>
-
+                <div className="menubar">
+                    <button>LISTA DE TAREFAS</button>
+                    <button onClick= {() => {setDeleteCategoryModal (true); } }>EDITAR CATEGORIA</button>
+                    <button onClick= {() => {setTaskModal (true); } }>CRIAR TAREFA</button>
+                    <button onClick= {() => {setCategoryModal (true); } }>CRIAR LISTA</button>
+                    <button>AJUSTES</button>
+                </div>
             </div>
 
             <div className='content'>   {/* lado direito */}
@@ -93,28 +95,58 @@ const Aplicaçao: React.FC = () => {
                             return (
                                 <>
                                     <h1> {name} </h1>
-                                    <input onChange={e => { setInfo(e.target.value) }} />
-                                    <button onClick={() => { createTask(_id) }} > ahhh</button>
                                     <Carrosel taskList={tasks} />
                                 </>
                             );
                         })
                     }
-                    <button onClick= {() => {setTaskModal (true); } }> true/false</button>
+                   
 
-                   {taskModal ? <div className ="taskModal">
-
-                       <h1>Funfou mlk</h1>
+                   {taskModal ? 
+                   <div className ="taskModal">
+                       <h1>CRIAR TAREFA</h1>
+                       <div className="form-item">
+                            <h2>Nome:</h2><input onChange={e => { setTaskName(e.target.value) }} />
+                       </div>
+                       
+                       <h2>Categoria:</h2>
+                       <select value={categoryValue} onChange={(e:BaseSyntheticEvent) => onChangeSelect(e.target.value)}>
+                       <option></option>
+                            {
+                                category?.map(({ _id, name}) => {
+                                    return (
+                                        <>
+                                            <option value={_id}>{name}</option>
+                                        </>
+                                    );
+                                })
+                            }
+                        
+                           
+                       </select>
+                       <button onClick={() => {createTask(categoryValue)}}>CRIAR</button>
                    </div> : null}
 
 
+                   {categoryModal ? 
+                   <div className ="taskModal">
+                       <h1>CRIAR LISTA</h1>
+                       <div className="form-item">
+                            <h2>Nome:</h2><input onChange={e => { setCategoryName(e.target.value) }} />
+                       </div>
+                       <button onClick={() => {createCategory(categoryName)}}>CRIAR</button>
+                   </div> : null}
 
-
-
-
+                   {/* {deleteCategoryModal ? 
+                   <div className ="taskModal">
+                       <h1>EDITAR LISTA</h1>
+                       <div className="form-item">
+                            <h2>Nome:</h2><input/>
+                       </div>
+                       <button>CRIAR</button>
+                       <button >apagar</button>
+                   </div> : null} */}
                 </div>
-
-
             </div>
         </div>
     );

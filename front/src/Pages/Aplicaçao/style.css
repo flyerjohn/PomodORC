@@ -131,3 +131,16 @@
         font-size: 18px;
     }
 }
+.taskModal{
+
+
+ background-color:linear-gradient(#0E1826 0% , #0a1625 100%) ;
+ justify-content: center;
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+ top: 25%;
+  border-radius: 29px;
+ height: 50vh;
+ width: 100vh;
+
+}

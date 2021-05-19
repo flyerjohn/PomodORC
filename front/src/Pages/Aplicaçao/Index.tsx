@@ -14,6 +14,7 @@ const Aplicaçao: React.FC = () => {
 
 
     const [category, setCategory] = useState([]);
+    var [taskModal, setTaskModal] = useState(false);
 
     async function loadData() {
         /*  
@@ -26,7 +27,7 @@ const Aplicaçao: React.FC = () => {
         */
     }
 
-    
+
 
     useEffect(
         () => {
@@ -85,41 +86,35 @@ const Aplicaçao: React.FC = () => {
                 </header>
 
                 <div className='content-app'>
-                   
-                    
+
+
                     {
-            category?.map(({_id,name,tasks})=>{
-                return (
-                    <> 
-                    <h1> {name} </h1> 
-                    <input onChange={e => { setInfo(e.target.value) }} />
-                    <button onClick={() => {createTask(_id) }} > ahhh</button>
-                    <Carrosel taskList={tasks} />
-                    </>
-                );
-            }) 
-            }
-                
-                    
+                        category?.map(({ _id, name, tasks }) => {
+                            return (
+                                <>
+                                    <h1> {name} </h1>
+                                    <input onChange={e => { setInfo(e.target.value) }} />
+                                    <button onClick={() => { createTask(_id) }} > ahhh</button>
+                                    <Carrosel taskList={tasks} />
+                                </>
+                            );
+                        })
+                    }
+                    <button onClick= {() => {setTaskModal (true); } }> true/false</button>
+
+                   {taskModal ? <div className ="taskModal">
+
+                       <h1>Funfou mlk</h1>
+                   </div> : null}
 
 
-                    
-                    <br/>
 
-                   
+
+
+
                 </div>
 
-                <div>
 
-                    <br></br>
-                    <br></br>
-                    <br></br>
-                    <br></br>
-                    <br></br>
-                   
-
-                    
-                </div>
             </div>
         </div>
     );

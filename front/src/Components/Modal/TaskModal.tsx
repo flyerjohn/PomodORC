@@ -1,6 +1,6 @@
 import React, { BaseSyntheticEvent } from 'react';
 import { RiCloseLine } from "react-icons/ri";
-import './../../Pages/Aplicaçao/style.css';
+import './style.css';
 
 interface ICategory{
     name: string,

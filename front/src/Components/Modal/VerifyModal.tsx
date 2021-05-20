@@ -1,5 +1,7 @@
 import React from 'react'
 import { RiCloseLine } from "react-icons/ri";
+import './style.css';
+
 const VerifyModal= ({setEditCategoryModal, setVerifyModal,categoryId, deleteCategory}:{ 
     setEditCategoryModal: Function,
     setVerifyModal: Function,

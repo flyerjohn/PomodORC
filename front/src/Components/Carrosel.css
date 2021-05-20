@@ -1,7 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap');
+
 .card-wrapper{
     position: relative;
     width: 100%;
-    
     padding: 0 20px;
     box-sizing: border-box;
 }
@@ -35,7 +36,8 @@
 .card-title h2{
     text-transform:uppercase;
     font-family: 'Montserrat', sans-serif;
-    font-weight:lighter;
+    font-weight:300;
+    letter-spacing: -0.06em;
     font-size: 3vh;
 }
 

@@ -2,6 +2,7 @@ import React from 'react';
 import { FiEdit } from "react-icons/fi";
 import Carrosel from '../../Components/Carrosel';
 import './../../Pages/Aplicaçao/style.css';
+import './style.css';
 
 interface ITask{
     name: string

@@ -1,7 +1,7 @@
 import React from 'react';
 import { RiCloseLine } from "react-icons/ri";
 import { IoMdTrash } from "react-icons/io";
-import './../../Pages/Aplicaçao/style.css';
+import './style.css';
 import VerifyModal from './VerifyModal';
 
 

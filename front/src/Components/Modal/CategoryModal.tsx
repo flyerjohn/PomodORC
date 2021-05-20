@@ -1,5 +1,6 @@
 import React, { BaseSyntheticEvent } from 'react';
 import { RiCloseLine } from "react-icons/ri";
+import './style.css';
 
 const CategoryModal = ({setCategoryModal, categoryName, setCategoryName, createCategory}:{
     setCategoryModal: Function,
@@ -12,9 +13,9 @@ const CategoryModal = ({setCategoryModal, categoryName, setCategoryName, createC
         <h1>CRIAR LISTA</h1>
             <RiCloseLine className= "closeCategoryIcon" onClick= {()=> setCategoryModal(false)}/>
             <div className="form-item">
-                <h2>Nome:</h2><input onChange={e => { setCategoryName(e.target.value) }} className = "input-item"/>
+                <h2>Nome:</h2><input onChange={e => { setCategoryName(e.target.value) }} />
             </div>
-            <button className= "createButton" onClick={() => {createCategory(categoryName)}}>CRIAR</button>
+            <button onClick={() => {createCategory(categoryName)}}>CRIAR</button>
         </div>
     );
 }

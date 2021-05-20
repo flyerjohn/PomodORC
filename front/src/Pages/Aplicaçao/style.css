@@ -1,0 +1,155 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap');
+
+
+.container{
+    background-color: white;
+    display: flex;
+    flex-direction: row;
+    font-family: 'Roboto', sans-serif;
+    width: 100%;
+    height: 100%;
+    color: #E5E5E5;
+}
+
+/*============= menu, parte esquerda=============*/
+
+.menu{
+    background-color: #BF4226;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items:center;
+    position: fixed;
+    width: 25%;
+    height: 100vh;
+    font-size: 24px;
+    font-weight: 500;
+}
+
+
+.menubar{
+    display: flex;
+    flex-direction: column;
+}
+
+.menubar button{
+    padding: 0.8rem;
+    align-items: center;
+    background: none;
+    border:none;
+    font-size: 1.2rem;
+    color: #fff;
+    opacity: 0.6; transition: 0.3s;
+}
+
+.menubar button:hover{
+    opacity:1;
+    cursor: pointer;
+}
+
+.spacer{
+    width: 25%;
+}
+
+.espaçamento-logo{
+    padding: 14px 0px;
+}
+
+.espaçamento-logo img{  /*img responsiva*/
+    max-width: 100%;
+    height: auto;
+}
+
+.rotas{
+    text-decoration: none;
+}
+
+/*== final da formatação link==*/
+
+@media (max-width: 600px){
+    .menubar button{
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 320px){
+    .menubar button{
+        font-size: 8px;
+    }
+}
+
+@media (min-width: 600px) and (max-width: 850px){
+    .menubar button{
+        font-size: 16px;
+    }
+}
+
+
+/*=============conteudo, parte direita=============*/
+
+.content{
+    width: 75%;
+    min-height: 100vh;
+    background-color: #0E1826; 
+    max-height: 100%;   
+}
+
+.header-content{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    font-size: 24px;
+    font-weight: 500;
+    margin: 20px;
+}
+
+.content-app{
+    margin: 25px;
+}
+
+.content-app p{
+    color: #BF4226;
+    font-size: 24px;
+    font-weight: 500;
+    letter-spacing: 1px;   
+}
+
+@keyframes fadeIn {
+    from {background-color: none;}
+    to {background-color: #000000;}
+}
+.backgroundModal{    
+    position: fixed;
+    opacity:0.7;
+    height: 100%;
+    width: 100%;
+    z-index: 1;
+    animation-name: fadeIn;
+    animation-duration: 0.3s;
+    animation-fill-mode: forwards;
+}
+
+
+@media (max-width: 600px){
+    .content-app{
+        margin: 20px;
+    }
+    .content-app p {
+        font-size: 13px;
+    }
+    .header-content {
+        font-size: 13px;
+    }
+}
+
+@media (min-width: 600px) and (max-width: 850px){
+    .content-app p{
+        font-size: 18px;
+    }
+    .header-content {
+        font-size: 18px;
+    }
+}
+
+

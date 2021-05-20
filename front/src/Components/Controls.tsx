@@ -8,7 +8,7 @@ type Props = {
     timeInSeconds: number,
     playButton: MouseEventHandler<HTMLButtonElement>,
     stopButton: MouseEventHandler<HTMLButtonElement>,
-    resetButton: MouseEventHandler<HTMLButtonElement>
+    resetButton: MouseEventHandler<HTMLButtonElement>,
     /*setTimeInSecondsDescanso: Function*/
 };
 
@@ -21,11 +21,6 @@ const Controls = (props:Props) => {
     /*const { setTimeInSecondsDescanso } = props;*/
     const [intervalId, setIntervalId] = useState<number>(0);
     const [running, setRunning] = useState<boolean>(false);
-    const [count, setCount] = useState<number>(4);
-    
-    useEffect(() => {
-        console.log('hedahde');
-    },[count]);
 
     return (
         <div className='controls-container'>

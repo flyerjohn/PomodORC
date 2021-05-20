@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import ControlsDescanso from '../ControlsDescanso';
 import calculateTimer from '../../Components/Helper/CalculateTime';
 import Controls from '../../Components/Controls';
 
@@ -9,23 +8,23 @@ interface TaskCardProps {
 }
 
 const TaskCard = ({ name, id }: TaskCardProps) => {
-
+    
     const [timeArray, setTimerArray] = useState<Array<number | string>>([]);
     const [timeInSeconds, setTimeInSeconds] = useState<number>(5);
-    const [timeInSecondsDescanso, setTimeInSecondsDescanso] = useState<number>(300);
     const [intervalId, setIntervalId] = useState<number>(0);
     const [running, setRunning] = useState<boolean>(false);
-
+    var [count, setCount] = useState<number>(2);
 
     const handlePlayButton = () => {
         let interval: any = setInterval(() => {
             setTimeInSeconds((previousState: number) =>
-                previousState - 1);
+                previousState - 1); 
         }, 1000);
 
         setIntervalId(interval);
         setRunning(false);
         clearInterval(intervalId);
+
     }
 
     const handleStopButton = () => {
@@ -40,19 +39,37 @@ const TaskCard = ({ name, id }: TaskCardProps) => {
     }
 
     useEffect(() => {
-        if (timeInSeconds === 0) {
+        if (timeInSeconds === 0 && count === 2) {
             setTimerArray([timeArray[3], timeArray[3]]);
-        }
-        if (timeInSeconds === -1) {
             clearInterval(intervalId);
-            setTimeInSeconds(5);
+            setTimeout(function () {
+                alert("tempo de descanso");
+                setTimeInSeconds(11);
+                setCount(count- 1);
+                setTimeInSeconds((previousState: number) =>
+                    previousState - 1);
+                    
+            }, 1000);
+            
+            
         }
-         else {
-            let timeArray: Array<number | string> = calculateTimer(timeInSeconds, timeInSecondsDescanso);
+        if (timeInSeconds === -1 && count === 1) {
+            setTimerArray([timeArray[3], timeArray[3]]);
+            clearInterval(intervalId);
+            setTimeout(function () {
+                alert("fim do descanso");
+                setTimeInSeconds(5);
+                setCount(count+ 1);
+                    
+            }, 1000);
+           
+        }
+        else {
+            let timeArray: Array<number | string> = calculateTimer(timeInSeconds);
             setTimerArray(timeArray);
         }
-        console.log(timeInSeconds);
-    }, [timeInSeconds, timeInSecondsDescanso]);
+        console.log(timeInSeconds, count);
+    }, [timeInSeconds, count]);
 
     return (
         <div className='card-wrapper' key={id}>
@@ -78,12 +95,8 @@ const TaskCard = ({ name, id }: TaskCardProps) => {
                             stopButton={handleStopButton}
                             setTimeInSeconds={setTimeInSeconds}
                             timeInSeconds={timeInSeconds}
-                        />
 
-                        <h2>
-                            {timeInSeconds == 0 ? <ControlsDescanso
-                                setTimeInSecondsDescanso={setTimeInSecondsDescanso} /> : null}
-                        </h2>
+                        />
 
                     </section>
 

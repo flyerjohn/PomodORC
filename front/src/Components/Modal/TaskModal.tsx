@@ -22,27 +22,31 @@ const TaskModal = ({ _id, name, setTaskName, setTaskModal, categoryValue, create
 }) =>{
     return (
         <div className ="taskModal">
-        <h1>CRIAR TAREFA</h1>
-        <RiCloseLine className= "closeTaskIcon" onClick= {()=> setTaskModal(false)}/>
-        <div className="form-item">
-             <h2>Nome:</h2><input onChange={e => { setTaskName(e.target.value) }} maxLength = {num} className="input-item" />
-        </div>
-        
-        <h2>Categoria:</h2>
-        <select className= "select"value={categoryValue} onChange={(e:BaseSyntheticEvent) => onChangeSelect(e.target.value)}>
-        <option></option>
-             {
-                 category?.map(({ _id, name}) => {
-                     return (
-                         <>
-                             <option value={_id}>{name}</option>
-                         </>
-                     );
-                 })
-             }
+            <div className="modalTitle">
+                <h1>CRIAR TAREFA</h1>
+            </div>
+            <RiCloseLine className= "closeTaskIcon" onClick= {()=> setTaskModal(false)}/>
+            <div className="form-item">
+                <h2>Nome:</h2>
+                <input onChange={e => { setTaskName(e.target.value) }} maxLength = {num} className="input-item" />
+            </div>
             
-        </select>
-        <button className="createButton" onClick={() => {createTask(categoryValue)}}>CRIAR</button>
+            <div className="category-item">
+                <h2>Categoria:</h2>
+                <select className= "select"value={categoryValue} onChange={(e:BaseSyntheticEvent) => onChangeSelect(e.target.value)}>
+                <option></option>
+                    {
+                        category?.map(({ _id, name}) => {
+                            return (
+                                <>
+                                    <option value={_id}>{name}</option>
+                                </>
+                            );
+                        })
+                    }     
+                </select>
+            </div>
+            <button className="createButton" onClick={() => {createTask(categoryValue)}}>CRIAR</button>
     </div>
     );
 }

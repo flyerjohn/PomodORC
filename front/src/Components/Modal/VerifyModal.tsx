@@ -9,13 +9,13 @@ const VerifyModal= ({setEditCategoryModal, setVerifyModal,categoryId, deleteCate
     categoryId: string
 })=>{
     return(
-<div className = "verifyModal">
- <h1> Tem certeza que deseja excluir <span>TODA</span> essa lista?</h1>
- <div className= "row">
- <button className= "verifyButton" onClick= {()=>{deleteCategory(categoryId)}}> SIM </button> 
- <div className="separate"/>
- <button className= "verifyButton" onClick= {()=> {setEditCategoryModal(false); setVerifyModal(false)}}>NÃO</button>
- </div>
-</div>
+    <div className = "verifyModal">
+        <h1> Tem certeza que deseja excluir <span>TODA</span> essa lista?</h1>
+        <div className= "row">
+            <button className= "verifyButton" onClick= {()=>{deleteCategory(categoryId)}}> SIM </button> 
+                <div className="separate"/>
+            <button className= "verifyButton" onClick= {()=> {setEditCategoryModal(false); setVerifyModal(false)}}>NÃO</button>
+        </div>
+    </div>
     )}
 export default VerifyModal

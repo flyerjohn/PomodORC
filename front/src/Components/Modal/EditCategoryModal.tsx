@@ -17,7 +17,9 @@ const EditCategoryModal = ({categoryId, categoryName,setCategoryName, updateCate
     return(
         
         <div className ="taskModal">
-            <h1>EDITAR LISTA</h1>
+            <div className="modalTitle">
+                <h1>EDITAR LISTA</h1>
+            </div>
             <RiCloseLine className= "closeCategoryIcon" onClick= {()=> setEditCategoryModal(false)}/>
             <div className="form-item">
                     <h2>Nome:</h2>

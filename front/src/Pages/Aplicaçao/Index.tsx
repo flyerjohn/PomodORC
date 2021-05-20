@@ -99,7 +99,6 @@ const Aplicaçao: React.FC = () => {
                 <div className="menubar">
                     <button onClick= {() => {setTaskModal (true); } }>CRIAR TAREFA</button>
                     <button onClick= {() => {setCategoryModal (true); } }>CRIAR LISTA</button>
-                    <button>AJUSTES</button>
                 </div>
 
             </div>

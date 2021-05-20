@@ -73,7 +73,7 @@
 }
 
 .closeCategoryIcon{
-    margin-top: -13vh;
+    margin-top: -10vh;
     margin-right: 3vh;
     display: flex;
     align-self: flex-end;
@@ -106,7 +106,7 @@
     height: 35%;
     background-color: #243d5f;
     border:#000;
-    margin-bottom: 30%;
+    margin-bottom: 5%;
     color:#fff;
     font-size: 1rem;
     border-radius: 10px;

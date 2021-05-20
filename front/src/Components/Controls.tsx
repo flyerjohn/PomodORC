@@ -1,32 +1,29 @@
-import React, { useState } from 'react';
+import React, { MouseEventHandler, useEffect, useState } from 'react';
 import './Controlsss.css';
+import { IoPlayOutline, IoStopOutline, IoRepeatOutline } from 'react-icons/io5';
+
 
 type Props = {
-    setTimeInSeconds: Function
+    setTimeInSeconds: Function,
+    timeInSeconds: number,
+    playButton: MouseEventHandler<HTMLButtonElement>,
+    stopButton: MouseEventHandler<HTMLButtonElement>,
+    resetButton: MouseEventHandler<HTMLButtonElement>
     /*setTimeInSecondsDescanso: Function*/
 };
 
 const Controls = (props:Props) => {
     const { setTimeInSeconds } = props;
+    const {playButton} = props;
+    const {stopButton} = props;
+    const {resetButton} = props;
+
     /*const { setTimeInSecondsDescanso } = props;*/
     const [intervalId, setIntervalId] = useState<number>(0);
     const [running, setRunning] = useState<boolean>(false);
+    const [count, setCount] = useState<number>(4);
     
-    const handlePlayButton = () => {
-        let interval:any = setInterval(() => {
-            setTimeInSeconds((previousState:number) => 
-            previousState - 1);
-            if (intervalId === 0) 
-            {  /*setTimeInSecondsDescanso((previousState:number) => 
-                previousState - 1);
-                setTimeInSeconds = useState<number>(10);*/
-                console.log('deu bom parceiro');
-            } 
-        }, 1000);
-
-        setIntervalId(interval);
-        setRunning(true);
-    }
+    
 
     const handleStopButton = () => {
         clearInterval(intervalId);
@@ -39,12 +36,15 @@ const Controls = (props:Props) => {
         setRunning(false);
     }
     
+    useEffect(() => {
+        console.log('hedahde');
+    },[count]);
 
     return (
         <div className='controls-container'>
-            <button onClick={handlePlayButton} disabled={running}>Play</button>
-            <button onClick={handleStopButton}>Stop</button>
-            <button onClick={handleResetButton}>Reset</button>
+            <button onClick={playButton} disabled={running}><IoPlayOutline /></button>
+            <button onClick={stopButton}><IoStopOutline /></button>
+            <button onClick={resetButton}><IoRepeatOutline /></button>
         </div>
     );
 }

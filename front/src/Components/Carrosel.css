@@ -32,6 +32,13 @@
         transition: all .2s;
 }
 
+.main-container{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .timer-container{
     color: #E5E5E5;
     display: flex;

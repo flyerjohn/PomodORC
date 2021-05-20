@@ -23,19 +23,6 @@ const Controls = (props:Props) => {
     const [running, setRunning] = useState<boolean>(false);
     const [count, setCount] = useState<number>(4);
     
-    
-
-    const handleStopButton = () => {
-        clearInterval(intervalId);
-        setRunning(false);
-    }
-
-    const handleResetButton = () => {
-        clearInterval(intervalId);
-        setTimeInSeconds(1500);
-        setRunning(false);
-    }
-    
     useEffect(() => {
         console.log('hedahde');
     },[count]);

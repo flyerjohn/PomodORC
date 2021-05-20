@@ -24,7 +24,8 @@ const TaskCard = ({ name, id }: TaskCardProps) => {
         }, 1000);
 
         setIntervalId(interval);
-
+        setRunning(false);
+        clearInterval(intervalId);
     }
 
     const handleStopButton = () => {
@@ -40,10 +41,13 @@ const TaskCard = ({ name, id }: TaskCardProps) => {
 
     useEffect(() => {
         if (timeInSeconds === 0) {
-            setTimeInSeconds(3);
+            setTimerArray([timeArray[3], timeArray[3]]);
+        }
+        if (timeInSeconds === -1) {
             clearInterval(intervalId);
-            return;
-        } else {
+            setTimeInSeconds(5);
+        }
+         else {
             let timeArray: Array<number | string> = calculateTimer(timeInSeconds, timeInSecondsDescanso);
             setTimerArray(timeArray);
         }

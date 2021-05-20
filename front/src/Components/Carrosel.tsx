@@ -5,7 +5,7 @@ import "slick-carousel/slick/slick-theme.css";
 import '../Components/Carrosel.css';
 import api from '../services/api';
 
-
+import TaskCard from './Helper/TaskCard';
 
 interface ITask{
     name: string
@@ -77,6 +77,7 @@ const Carrosel = ({taskList} : ITaskList) => {
         }
     }
 
+
     useEffect(() => {
         getTasks(); 
     },[]);
@@ -85,17 +86,9 @@ const Carrosel = ({taskList} : ITaskList) => {
             {
             taskList?.map(({_id,name})=>{
                 return (
-                    <div className='card-wrapper' >
-                        <div className='card'>
-                            <div className='card-task'>
-                            <div className="card-title">
-                                <h2>{name}</h2>
-                            </div>
-                             <button onClick= {()=>deleteTask(_id)}> Apagar o bang</button>
-                            </div>
-                            
-                        </div>
-                    </div>
+                    
+                                <TaskCard name={name} id={_id}/>
+                
                 );
             }) 
             }

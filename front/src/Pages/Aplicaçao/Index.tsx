@@ -5,6 +5,7 @@ import Lista from '../../Components/Modal/Lista';
 import TaskModal from '../../Components/Modal/TaskModal';
 import CategoryModal from '../../Components/Modal/CategoryModal';
 import EditCategoryModal from '../../Components/Modal/EditCategoryModal';
+import VerifyModal from '../../Components/Modal/VerifyModal'
 
 const Aplicaçao: React.FC = () => {
 
@@ -12,10 +13,12 @@ const Aplicaçao: React.FC = () => {
     const [taskModal, setTaskModal] = useState(false);
     const [categoryModal, setCategoryModal] = useState(false);
     const [editCategoryModal, setEditCategoryModal] = useState(false);
+    const [verifyModal, setVerifyModal] = useState(false);
     const [categoryValue, setCategoryValue] = useState<string>('');
     const [taskName, setTaskName] = useState('');
     const [categoryName, setCategoryName] = useState('');
     const [categoryId, setCategoryId] = useState('');
+    
 
 
     function onChangeSelect(value:string){
@@ -83,7 +86,10 @@ const Aplicaçao: React.FC = () => {
 
 
     return (
+        <div className= "backgroundApp">
         <div className='container'>
+             {taskModal|| categoryModal || editCategoryModal? <div className= "backgroundModal"/>:null }
+            
             <div className= "spacer"/>
             <div className='menu'>  
                 <picture className='espaçamento-logo'>
@@ -113,12 +119,14 @@ const Aplicaçao: React.FC = () => {
                     }
                    
                    {taskModal ? <TaskModal name={categoryName} _id={categoryId} categoryValue={categoryValue} category={category} setTaskModal={setTaskModal} setTaskName={setTaskName} createTask={createTask} onChangeSelect={onChangeSelect} /> : null}
-
+                
                    {categoryModal ? <CategoryModal setCategoryModal={setCategoryModal} categoryName={categoryName} setCategoryName={setCategoryName} createCategory={createCategory} /> : null}
 
-                   {editCategoryModal ? <EditCategoryModal categoryId={categoryId} categoryName={categoryName} setCategoryName={setCategoryName} updateCategory={updateCategory} deleteCategory={deleteCategory} setEditCategoryModal={setEditCategoryModal} />: null}
+                   {editCategoryModal ? <EditCategoryModal categoryId={categoryId} categoryName={categoryName} setCategoryName={setCategoryName} updateCategory={updateCategory} deleteCategory={deleteCategory} setEditCategoryModal={setEditCategoryModal} setVerifyModal= {setVerifyModal} />: null}
+                   {verifyModal? <VerifyModal setEditCategoryModal={setEditCategoryModal} setVerifyModal ={setVerifyModal} categoryId={categoryId} deleteCategory = {deleteCategory}/> : null}
                 </div>
             </div>
+        </div>
         </div>
     );
 }

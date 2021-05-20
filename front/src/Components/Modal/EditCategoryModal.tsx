@@ -2,17 +2,20 @@ import React from 'react';
 import { RiCloseLine } from "react-icons/ri";
 import { IoMdTrash } from "react-icons/io";
 import './../../Pages/Aplicaçao/style.css';
+import VerifyModal from './VerifyModal';
 
 
-const EditCategoryModal = ({categoryId, categoryName,setCategoryName, updateCategory, deleteCategory,setEditCategoryModal}:{
+const EditCategoryModal = ({categoryId, categoryName,setCategoryName, updateCategory, deleteCategory,setEditCategoryModal,setVerifyModal}:{
     categoryId: string,
     categoryName: string,
     setCategoryName: Function,
     updateCategory: Function,
     deleteCategory: Function,
-    setEditCategoryModal: Function
+    setEditCategoryModal: Function,
+    setVerifyModal: Function
 }) => {
     return(
+        
         <div className ="taskModal">
             <h1>EDITAR LISTA</h1>
             <RiCloseLine className= "closeCategoryIcon" onClick= {()=> setEditCategoryModal(false)}/>
@@ -21,8 +24,10 @@ const EditCategoryModal = ({categoryId, categoryName,setCategoryName, updateCate
                     <input className="input-item" onChange= { e => {setCategoryName(e.target.value)}}/>
             </div>
             <button className="createButton" onClick={()=> updateCategory(categoryName,categoryId)}>CRIAR</button>
-            <IoMdTrash className="trash-item" onClick={()=> deleteCategory(categoryId)}/>
+            <IoMdTrash className="trash-item" onClick={ ()=> setVerifyModal(true)}/>
         </div> 
+       
+        
     );
 }
 

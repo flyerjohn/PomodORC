@@ -12,9 +12,9 @@ const CategoryModal = ({setCategoryModal, categoryName, setCategoryName, createC
         <h1>CRIAR LISTA</h1>
             <RiCloseLine className= "closeCategoryIcon" onClick= {()=> setCategoryModal(false)}/>
             <div className="form-item">
-                <h2>Nome:</h2><input onChange={e => { setCategoryName(e.target.value) }} />
+                <h2>Nome:</h2><input onChange={e => { setCategoryName(e.target.value) }} className = "input-item"/>
             </div>
-            <button onClick={() => {createCategory(categoryName)}}>CRIAR</button>
+            <button className= "createButton" onClick={() => {createCategory(categoryName)}}>CRIAR</button>
         </div>
     );
 }

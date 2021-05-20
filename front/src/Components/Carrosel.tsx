@@ -7,7 +7,15 @@ import api from '../services/api';
 
 import TaskCard from './Helper/TaskCard';
 
-const Carrosel = () => {
+interface ITask{
+    name: string
+    checked: boolean
+    _id: string 
+}
+interface ITaskList {
+    taskList: Array<ITask>;
+}
+const Carrosel = ({taskList} : ITaskList) => {
     const [tasks, setTasks] = useState([]);
 
     let settings = {
@@ -23,7 +31,7 @@ const Carrosel = () => {
               settings: {
                 slidesToShow: 3,
                 slidesToScroll: 3,
-                infinite: true,
+                infinite: false,
                 dots: true
               }
             },
@@ -52,6 +60,22 @@ const Carrosel = () => {
             console.log(error.message);
         }
     }
+    const updateTasks  = async (_id: string) =>{
+        try {
+             await api.put(`tasks/${_id}`);            
+            window.location.reload();
+        } catch (error) {
+            console.log(error.message);
+        }
+    }
+    const deleteTask = async (_id: string) =>{
+        try { 
+            await api.delete(`tasks/${_id}`);           
+            window.location.reload();
+        } catch (error) {
+            console.log(error.message);
+        }
+    }
 
 
     useEffect(() => {
@@ -60,9 +84,11 @@ const Carrosel = () => {
     return (
         <Slider {...settings}>
             {
-            tasks?.map(({_id,name})=>{
+            taskList?.map(({_id,name})=>{
                 return (
-                    <TaskCard id={_id} name={name}/>
+                    
+                                <TaskCard name={name} id={_id}/>
+                
                 );
             }) 
             }

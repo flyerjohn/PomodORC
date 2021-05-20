@@ -5,7 +5,7 @@ export default class CategoryControllers{
 
     async getCategorys (req: Request , res: Response) :Promise <Response>{
         try{
-            const category = await Category.find();
+            const category = await Category.find().populate("tasks");
             return res.status(200).json(category);
         }catch(erro){
             return res.status(400).json(erro.menssage);
@@ -13,7 +13,7 @@ export default class CategoryControllers{
     }
     async getSpecificCategory (req: Request , res: Response) :Promise <Response>{
         try{
-            const category = await Category.find({'_id' : req.params._id});
+            const category = await Category.findById(req.params._id).populate("tasks");
             return res.status(200).json(category);
         }catch(erro){
             return res.status(400).json(erro.menssage);

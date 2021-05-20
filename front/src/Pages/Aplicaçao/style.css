@@ -1,11 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap');
+
+
 .container{
     background-color: white;
     display: flex;
     flex-direction: row;
-
+    font-family: 'Roboto', sans-serif;
     width: 100%;
-    height: 100vh;
-
+    height: 100%;
     color: #E5E5E5;
 }
 
@@ -13,18 +15,41 @@
 
 .menu{
     background-color: #BF4226;
-
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
     justify-content: flex-start;
     align-items:center;
-    
+    position: fixed;
     width: 25%;
     height: 100vh;
-
     font-size: 24px;
     font-weight: 500;
+}
+
+
+.menubar{
+    display: flex;
+    flex-direction: column;
+}
+
+.menubar button{
+    padding: 0.8rem;
+    align-items: center;
+    background: none;
+    border:none;
+    font-size: 1.2rem;
+    color: #fff;
+    opacity: 0.6; transition: 0.3s;
+}
+
+.menubar button:hover{
+    opacity:1;
+    cursor: pointer;
+}
+
+.spacer{
+    width: 25%;
 }
 
 .espaçamento-logo{
@@ -36,24 +61,6 @@
     height: auto;
 }
 
-/*==formatação link==*/
-
-.rotas:link{ 
-    color: #E5E5E5;     /*== para links nao visitados ==*/
-}
-
-.rotas:visited{
-    color: #741c08;     /*== para links visitados ==*/
-}
-
-.rotas:hover{
-    color: #DF6043;     /*== quando o cursor do mouse estiver sobre o link ==*/
-}
-
-.rotas:active{
-    color: #0E1826;     /*== quando o link for clicado ==*/
-}
-
 .rotas{
     text-decoration: none;
 }
@@ -61,19 +68,19 @@
 /*== final da formatação link==*/
 
 @media (max-width: 600px){
-    .menu{
-        font-size: 10px;
+    .menubar button{
+        font-size: 0.8rem;
     }
 }
 
 @media (max-width: 320px){
-    .menu{
+    .menubar button{
         font-size: 8px;
     }
 }
 
 @media (min-width: 600px) and (max-width: 850px){
-    .menu{
+    .menubar button{
         font-size: 16px;
     }
 }
@@ -83,20 +90,17 @@
 
 .content{
     width: 75%;
-    height: 100vh;
-
+    min-height: 100vh;
     background-color: #0E1826; 
-    
+    max-height: 100%;   
 }
 
 .header-content{
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-
     font-size: 24px;
     font-weight: 500;
-
     margin: 20px;
 }
 
@@ -108,8 +112,24 @@
     color: #BF4226;
     font-size: 24px;
     font-weight: 500;
-    letter-spacing: 1px;
+    letter-spacing: 1px;   
 }
+
+@keyframes fadeIn {
+    from {background-color: none;}
+    to {background-color: #000000;}
+}
+.backgroundModal{    
+    position: fixed;
+    opacity:0.7;
+    height: 100%;
+    width: 100%;
+    z-index: 1;
+    animation-name: fadeIn;
+    animation-duration: 0.3s;
+    animation-fill-mode: forwards;
+}
+
 
 @media (max-width: 600px){
     .content-app{
@@ -131,3 +151,5 @@
         font-size: 18px;
     }
 }
+
+

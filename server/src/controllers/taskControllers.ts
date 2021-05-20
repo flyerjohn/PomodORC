@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import Tasks from '../models/tasks';
+import Category from  '../models/category';
 
 export default class TaskControllers{
 
@@ -23,6 +24,7 @@ export default class TaskControllers{
     async createTask (req: Request, res: Response) :Promise <Response>{
         try {
             const task = await Tasks.create(req.body);
+            await Category.findByIdAndUpdate(req.params._id, {$addToSet: {tasks: task._id}})
             return res.status(201).json(task);
         } catch (error) {
             return res.status(400).json(error.message)

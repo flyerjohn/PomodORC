@@ -1,87 +1,131 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, BaseSyntheticEvent } from 'react';
 import './style.css';
 import api from '../../services/api';
-import { Link } from 'react-router-dom';
-import Carrosel from '../../Components/Carrosel';
-
-interface User {
-    name: string;
-}
+import Lista from '../../Components/Modal/Lista';
+import TaskModal from '../../Components/Modal/TaskModal';
+import CategoryModal from '../../Components/Modal/CategoryModal';
+import EditCategoryModal from '../../Components/Modal/EditCategoryModal';
+import VerifyModal from '../../Components/Modal/VerifyModal'
 
 const Aplicaçao: React.FC = () => {
 
-    const [user, setUser] = useState<User>();
+    const [category, setCategory] = useState([]);
+    const [taskModal, setTaskModal] = useState(false);
+    const [categoryModal, setCategoryModal] = useState(false);
+    const [editCategoryModal, setEditCategoryModal] = useState(false);
+    const [verifyModal, setVerifyModal] = useState(false);
+    const [categoryValue, setCategoryValue] = useState<string>('');
+    const [taskName, setTaskName] = useState('');
+    const [categoryName, setCategoryName] = useState('');
+    const [categoryId, setCategoryId] = useState('');
+    
 
-    async function loadData() {
-        /*  
-        try {
-            const response = await api.get('');
-            setUser (response.data[0]);
-        } catch (error) {
-            
-        }
-        */
+
+    function onChangeSelect(value:string){
+        setCategoryValue(value);
     }
 
-    useEffect (
-        () => {
-            loadData();
-        }, []
-    );
-    const [info, setInfo] = useState('');
+    function onChangeCategoryId(value:string){
+     setCategoryId(value);
+    }
 
-    const createTask = async () =>{
+    const createTask = async (_id: string) => {
         try {
-            await api.post('task',{
-                name: info
-            });           
+            await api.post(`task/${_id}`, {
+                name: taskName
+            });
             window.location.reload();
         } catch (error) {
             console.log(error.message);
         }
     }
-    
+
+    const getCategory = async () => {
+        try {
+            const _category = await api.get('categories');
+            setCategory(_category.data);
+        } catch (error) {
+            console.log(error.message);
+        }
+    }
+
+    const createCategory = async (name:string) => {
+        try {
+            await api.post("/category", {
+                name:name
+            });
+            window.location.reload();
+        } catch (error) {
+            console.log(error.message);
+        }
+    }
+
+    const updateCategory = async (name:string, _id: string) => {
+        try {
+            await api.put(`/categories/${_id}`, {
+                name:name
+            });
+            window.location.reload();
+        } catch (error) {
+            console.log(error.message);
+        }
+    }
+
+    const deleteCategory = async (_id:string) => {
+        try {
+            await api.delete(`/categories/${_id}`);
+            window.location.reload();
+        } catch (error) {
+            console.log(error.message);
+        }
+    }
+   
+    useEffect(() => {
+        getCategory();
+    }, []);
+
 
     return (
-        <div className='container' onClick={() => console.log(user)}>
+        <div className= "backgroundApp">
+        <div className='container'>
+             {taskModal|| categoryModal || editCategoryModal? <div className= "backgroundModal"/>:null }
             
-            <div className='menu'>   {/* lado esquerdo */}
+            <div className= "spacer"/>
+            <div className='menu'>  
                 <picture className='espaçamento-logo'>
-                    <img src="../Imagens/POMODORC 1.png" alt="LOGO"/>
-                        {/* imagem encontrada na pasta public */}
+                    <img src="../Imagens/POMODORC 1.png" alt="LOGO" />
                 </picture>
 
-                <p>LISTA DE TAREFAS</p>
-                <br></br>
-                <p>AJUSTES</p>
-                <br></br>
-
-                <Link className='rotas' to="/">  
-                    SAIR    {/* saida direcionada para o login */}
-                </Link>
+                <div className="menubar">
+                    <button onClick= {() => {setTaskModal (true); } }>CRIAR TAREFA</button>
+                    <button onClick= {() => {setCategoryModal (true); } }>CRIAR LISTA</button>
+                </div>
 
             </div>
 
-            <div className='content'>   {/* lado direito */}
+            <div className='content'>  
                 <header className='header-content'>
-                    Olá {user?.name}
+                    Olá Pessoa!
                 </header>
 
                 <div className='content-app'>
-                    <p>LISTA</p>
-                    <br></br>
-                    <Carrosel />
-                    <br></br>
+                    {
+                        category?.map(({ _id, name, tasks }) => {
+                            return (                                 
+                                <Lista name= {name} tasks={tasks} setEditCategoryModal={setEditCategoryModal}  setCategoryId={()=>{onChangeCategoryId(_id)}}/>
+                            );
+                        })
+                    }
+                   
+                   {taskModal ? <TaskModal name={categoryName} _id={categoryId} categoryValue={categoryValue} category={category} setTaskModal={setTaskModal} setTaskName={setTaskName} createTask={createTask} onChangeSelect={onChangeSelect} /> : null}
+                
+                   {categoryModal ? <CategoryModal setCategoryModal={setCategoryModal} categoryName={categoryName} setCategoryName={setCategoryName} createCategory={createCategory} /> : null}
+
+                   {editCategoryModal ? <EditCategoryModal categoryId={categoryId} categoryName={categoryName} setCategoryName={setCategoryName} updateCategory={updateCategory} deleteCategory={deleteCategory} setEditCategoryModal={setEditCategoryModal} setVerifyModal= {setVerifyModal} />: null}
+                   {verifyModal? <VerifyModal setEditCategoryModal={setEditCategoryModal} setVerifyModal ={setVerifyModal} categoryId={categoryId} deleteCategory = {deleteCategory}/> : null}
                 </div>
-           
-            <div>
-            <input onChange = { e => {setInfo(e.target.value)} }/>
-            
-            <button onClick= {()=>{createTask()}} >
-            GO
-            </button>
             </div>
-            </div>
+        </div>
         </div>
     );
 }

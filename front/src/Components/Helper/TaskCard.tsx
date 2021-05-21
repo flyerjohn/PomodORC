@@ -47,16 +47,18 @@ const TaskCard = ({ name, id , setRestModal, setEndRestModal}: TaskCardProps) =>
         setRestModal(true);
         setTimeInSeconds(11);
         setCount(count - 1);
+        /*resetButton(setRunning(false));*/
         setTimeInSeconds((previousState: number) => previousState - 1);
       }, 1000);
     }
 
     if (timeInSeconds === -1 && count === 1) {
-      setTimerArray([timeArray[3], timeArray[3]]);
+      setTimerArray([timeArray[0], timeArray[1]]);
       clearInterval(intervalId);
       setTimeout(function () {
         setEndRestModal(true);
         setTimeInSeconds(5);
+        setRunning(false);
         setCount(count + 1);
       }, 1000);
     } else {

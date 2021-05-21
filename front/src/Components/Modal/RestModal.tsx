@@ -23,6 +23,7 @@ const RestModal = ({
         />
       <MdAlarm className="alarm"></MdAlarm>
       <div className="modalTitle">
+        <br></br>
         <h1>{title}</h1> 
       </div>
     

@@ -42,17 +42,18 @@
     top: 25%;
     border-radius: 29px;
     height: 40%;
-    width: 50%;
+    width: 35%;
     display:flex;
     flex-direction: column;
     align-items: center;
-    margin-top:1.5rem;
+    margin-top: 1.5rem;
     text-align: center;
-    font-size: 1rem;
 }
 
 .restModal h1 {
-    margin-bottom: 2rem;
+    font-size: 1.5rem;
+    margin-bottom: 1.7rem;
+    letter-spacing: 1px;
 }
 
 .alarm {
@@ -111,6 +112,12 @@
     opacity: 1; transition: 0.3s;
 }
 
+.closeTaskIcon:hover,.closeCategoryIcon:hover{
+    opacity:1;
+    color: crimson;
+    cursor: pointer;
+}
+
 .closeCategoryIconTimer{
     margin-top: 1rem;
     margin-right: 3vh;
@@ -120,7 +127,7 @@
     opacity: 1; transition: 0.3s;
 }
 
-.closeTaskIcon:hover,.closeCategoryIcon:hover{
+.closeTaskIconTimer:hover,.closeCategoryIconTimer:hover{
     opacity:1;
     color: crimson;
     cursor: pointer;
@@ -205,4 +212,11 @@
 }
 .separate{
     padding: 1rem;
+}
+
+@media (max-width: 600px){
+    .restModal{
+        height: 40%;
+        width: 45%;
+    }
 }

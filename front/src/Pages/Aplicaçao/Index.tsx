@@ -8,6 +8,7 @@ import EditCategoryModal from "../../Components/Modal/EditCategoryModal";
 import VerifyModal from "../../Components/Modal/VerifyModal";
 import RestModal from "../../Components/Modal/RestModal";
 import EditTaskModal from "../../Components/Modal/EditTaskModal";
+import VerifyTaskModal from "../../Components/Modal/VerifyTaskModal";
 
 const Aplicaçao: React.FC = () => {
   const [category, setCategory] = useState([]);
@@ -16,6 +17,7 @@ const Aplicaçao: React.FC = () => {
   const [editCategoryModal, setEditCategoryModal] = useState(false);
   const [editTaskyModal, setEditTaskModal] = useState(false);
   const [verifyModal, setVerifyModal] = useState(false);
+  const [verifyTaskModal, setVerifyTaskModal] = useState(false);
   const [restModal, setRestModal] = useState(false);
   const [endRestModal, setEndRestModal] = useState(false);
   const [categoryValue, setCategoryValue] = useState<string>("");
@@ -172,6 +174,7 @@ const Aplicaçao: React.FC = () => {
             {editTaskyModal ? <EditTaskModal 
               name={categoryName}
               _id={categoryId}
+              setVerifyModal={setVerifyTaskModal}
               categoryValue={taskId}
               category={category}
               setEditTaskModal={setEditTaskModal}
@@ -206,6 +209,14 @@ const Aplicaçao: React.FC = () => {
                 setVerifyModal={setVerifyModal}
                 categoryId={categoryId}
                 deleteCategory={deleteCategory}
+              />
+            ) : null}
+            {verifyTaskModal ? (
+              <VerifyTaskModal
+                setEditTaskModal={setEditTaskModal}
+                setVerifyTaskModal={setVerifyTaskModal}
+                taskId={taskId}
+                deleteTask={deleteTask}
               />
             ) : null}
 

@@ -31,6 +31,36 @@
     color:#fff;
 }
 
+.restModal {
+    background:linear-gradient(180deg, #18273D 5%, #111d2e 100%);
+    font-family: 'Roboto', sans-serif;
+    border-color:#0E1826;
+    border-style: solid;
+    justify-content: space-around;
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    top: 25%;
+    border-radius: 29px;
+    height: 40%;
+    width: 50%;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top:1.5rem;
+    text-align: center;
+    font-size: 1rem;
+}
+
+.restModal h1 {
+    margin-bottom: 2rem;
+}
+
+.alarm {
+    width: 60%;
+    height: 60%;
+    opacity: 0.5;
+}
+
 .createButton{
     background-color: #BF4226;
     border:none;
@@ -74,6 +104,15 @@
 
 .closeCategoryIcon{
     margin-top: -10vh;
+    margin-right: 3vh;
+    display: flex;
+    align-self: flex-end;
+    font-size: 1.5rem;
+    opacity: 1; transition: 0.3s;
+}
+
+.closeCategoryIconTimer{
+    margin-top: 1rem;
     margin-right: 3vh;
     display: flex;
     align-self: flex-end;

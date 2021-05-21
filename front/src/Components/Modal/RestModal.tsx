@@ -1,5 +1,6 @@
 import React, { BaseSyntheticEvent } from "react";
 import { RiCloseLine } from "react-icons/ri";
+import { MdAlarm } from 'react-icons/md';
 import "./style.css";
 
 const RestModal = ({
@@ -11,18 +12,20 @@ const RestModal = ({
   title: string;
   setEndRestModal: Function;
 }) => {
-  return (
-    <div className="taskModal">
+  return (  
+    <div className="restModal">
+        <RiCloseLine
+          className="closeCategoryIconTimer"
+          onClick={() => {
+            setRestModal(false);
+            setEndRestModal(false);
+          }}
+        />
+      <MdAlarm className="alarm"></MdAlarm>
       <div className="modalTitle">
-        <h1>{title}</h1>
+        <h1>{title}</h1> 
       </div>
-      <RiCloseLine
-        className="closeCategoryIcon"
-        onClick={() => {
-          setRestModal(false);
-          setEndRestModal(false);
-        }}
-      />
+    
     </div>
   );
 };

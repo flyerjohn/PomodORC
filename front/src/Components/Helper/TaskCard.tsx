@@ -10,10 +10,11 @@ interface TaskCardProps {
   setRestModal: Function;
   setEndRestModal: Function;
   setEditTaskModal: Function;
-  checked: boolean
+  checked: boolean,
+  setTaskId: Function
 }
 
-const TaskCard = ({ name, id, setRestModal, setEndRestModal, checked, setEditTaskModal }: TaskCardProps) => {
+const TaskCard = ({ name, id, setRestModal, setEndRestModal, checked, setEditTaskModal,setTaskId }: TaskCardProps) => {
   const [timeArray, setTimerArray] = useState<Array<number | string>>([]);
   const [timeInSeconds, setTimeInSeconds] = useState<number>(5);
   const [intervalId, setIntervalId] = useState<number>(0);
@@ -93,7 +94,7 @@ const TaskCard = ({ name, id, setRestModal, setEndRestModal, checked, setEditTas
       <div className="card" >
         <div className="card-task">
           <div className="row">
-            <h2  onClick= {()=>{ setEditTaskModal(true)}}  className="card-title">{name}</h2>
+            <h2  onClick= {()=>{ setEditTaskModal(true); setTaskId(id)} }  className="card-title">{name}</h2>
            
             <input type="checkbox" className="checkBox" checked={isChecked} onChange={() => {
               setIsChecked(!isChecked);

@@ -22,6 +22,7 @@ const Aplicaçao: React.FC = () => {
   const [taskName, setTaskName] = useState("");
   const [categoryName, setCategoryName] = useState("");
   const [categoryId, setCategoryId] = useState("");
+  const [taskId, setTaskId] = useState("");
 
   function onChangeSelect(value: string) {
     setCategoryValue(value);
@@ -72,10 +73,10 @@ const Aplicaçao: React.FC = () => {
       console.log(error.message);
     }
   };
-  const updateTask = async (name: string, _id: string) => {
+  const updateTask = async ( _id: string) => {
     try {
       await api.put(`/tasks/${_id}`, {
-        name: name,
+        name: taskName,
       });
       window.location.reload();
     } catch (error) {
@@ -146,6 +147,7 @@ const Aplicaçao: React.FC = () => {
                   setRestModal={setRestModal}
                   setEndRestModal={setEndRestModal}
                   setEditTaskModal ={setEditTaskModal}
+                  setTaskId= {setTaskId}
                   tasks={tasks}
                   setEditCategoryModal={setEditCategoryModal}
                   setCategoryId={() => {
@@ -167,6 +169,16 @@ const Aplicaçao: React.FC = () => {
                 onChangeSelect={onChangeSelect}
               />
             ) : null}
+            {editTaskyModal ? <EditTaskModal 
+              name={categoryName}
+              _id={categoryId}
+              categoryValue={taskId}
+              category={category}
+              setEditTaskModal={setEditTaskModal}
+              setTaskName={setTaskName}
+              updateTask={updateTask}
+              onChangeSelect={onChangeSelect}
+               /> :null}
 
             {categoryModal ? (
               <CategoryModal
@@ -199,14 +211,7 @@ const Aplicaçao: React.FC = () => {
 
             {restModal ? <RestModal setRestModal={setRestModal} title="Vai descansar porra" setEndRestModal={setEndRestModal} /> : null}
             {endRestModal ? <RestModal setRestModal={setRestModal} title="Vai trabalhar porra" setEndRestModal={setEndRestModal} /> : null}
-            {editTaskyModal ? <EditTaskModal 
-              categoryId={categoryId}
-              categoryName={categoryName}
-              setCategoryName={setCategoryName}
-              updateTask={updateTask}
-              deleteTask={deleteTask}
-              setEditTaskModal={setEditTaskModal}
-               /> :null}
+            
           </div>
         </div>
       </div>

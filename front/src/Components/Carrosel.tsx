@@ -20,12 +20,15 @@ const Carrosel = ({
   taskList,
   setRestModal,
   setEndRestModal,
-  setEditTaskModal
+  setEditTaskModal,
+  setTaskId,
 }: {
   taskList: ITask[];
   setRestModal: Function;
   setEndRestModal: Function;
-  setEditTaskModal: Function
+  setTaskId: Function;
+  setEditTaskModal: Function;
+
 }) => {
   const [tasks, setTasks] = useState([]);
 
@@ -94,9 +97,11 @@ const Carrosel = ({
   return (
     <Slider {...settings}>
       {taskList?.map(({ _id, name,checked }) => {
+        
         return <TaskCard name={name} id={_id} setRestModal={setRestModal} 
         setEndRestModal={setEndRestModal} checked= {checked} 
-        setEditTaskModal ={setEditTaskModal}
+        setEditTaskModal ={setEditTaskModal} setTaskId= {setTaskId}
+        
         />;
         
       })}

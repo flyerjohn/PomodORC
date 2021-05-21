@@ -12,7 +12,7 @@ interface TaskCardProps {
 
 const TaskCard = ({ name, id , setRestModal, setEndRestModal}: TaskCardProps) => {
   const [timeArray, setTimerArray] = useState<Array<number | string>>([]);
-  const [timeInSeconds, setTimeInSeconds] = useState<number>(5);
+  const [timeInSeconds, setTimeInSeconds] = useState<number>(1500);
   const [intervalId, setIntervalId] = useState<number>(0);
   const [running, setRunning] = useState<boolean>(false);
 
@@ -33,7 +33,7 @@ const TaskCard = ({ name, id , setRestModal, setEndRestModal}: TaskCardProps) =>
     setRunning(false);
   };
 
-  const handleResetButton = () => {
+  var handleResetButton = () => {
     clearInterval(intervalId);
     setTimeInSeconds(1500);
     setRunning(false);
@@ -45,9 +45,8 @@ const TaskCard = ({ name, id , setRestModal, setEndRestModal}: TaskCardProps) =>
       clearInterval(intervalId);
       setTimeout(function () {
         setRestModal(true);
-        setTimeInSeconds(11);
+        setTimeInSeconds(301);
         setCount(count - 1);
-        /*resetButton(setRunning(false));*/
         setTimeInSeconds((previousState: number) => previousState - 1);
       }, 1000);
     }
@@ -55,17 +54,18 @@ const TaskCard = ({ name, id , setRestModal, setEndRestModal}: TaskCardProps) =>
     if (timeInSeconds === -1 && count === 1) {
       setTimerArray([timeArray[0], timeArray[1]]);
       clearInterval(intervalId);
+      setRunning(true);
       setTimeout(function () {
         setEndRestModal(true);
-        setTimeInSeconds(5);
+        setTimeInSeconds(1500);
         setRunning(false);
         setCount(count + 1);
       }, 1000);
+
     } else {
       let timeArray: Array<number | string> = calculateTimer(timeInSeconds);
       setTimerArray(timeArray);
     }
-    console.log(timeInSeconds, count);
   }, [timeInSeconds, count]);
 
   return (

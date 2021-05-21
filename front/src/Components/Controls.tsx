@@ -1,6 +1,6 @@
 import React, { MouseEventHandler, useEffect, useState } from 'react';
 import './Controlsss.css';
-import { IoPlayOutline, IoStopOutline, IoRepeatOutline } from 'react-icons/io5';
+import { IoPlayOutline, IoPauseOutline, IoRepeatOutline } from 'react-icons/io5';
 
 
 type Props = {
@@ -25,7 +25,7 @@ const Controls = (props:Props) => {
     return (
         <div className='controls-container'>
             <button onClick={playButton} disabled={running}><IoPlayOutline /></button>
-            <button onClick={stopButton}><IoStopOutline /></button>
+            <button onClick={stopButton}><IoPauseOutline /></button>
             <button onClick={resetButton}><IoRepeatOutline /></button>
         </div>
     );

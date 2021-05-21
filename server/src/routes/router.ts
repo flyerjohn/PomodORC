@@ -25,6 +25,9 @@ router.put("/tasks/:_id",(req: Request ,res:Response)=>{
 router.delete("/tasks/:_id",(req: Request, res: Response)=>{
     taskController.deleteTask(req,res);
 });
+router.patch("/tasks/:id",(req: Request ,res:Response)=>{
+    taskController.updateCheckedTask(req,res);
+});
 
 // Rotas das listas de tarefas(Categories)
 router.get("/categories",(req: Request, res: Response) => {

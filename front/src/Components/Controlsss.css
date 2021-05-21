@@ -3,11 +3,11 @@
     opacity: 1;
     color: #E5E5E5;
 
-    margin-top: 5px;
+    margin-top: 0;
     margin-right: 5px;
     border: none;
-    padding: 5px;
-    font-size: 1.5rem;
+    padding: 3px;
+    font-size: 1.3rem;
     font-weight: 600;
     cursor: pointer;
     border-radius: 15%;

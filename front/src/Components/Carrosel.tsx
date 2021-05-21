@@ -2,10 +2,11 @@ import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import "../Components/Carrosel.css";
+import "../Components/taskCard.css";
 import api from "../services/api";
 
 import TaskCard from "./Helper/TaskCard";
+import EditTaskModal from "./Modal/EditTaskModal";
 
 interface ITask {
   name: string;
@@ -18,11 +19,13 @@ interface ITaskList {
 const Carrosel = ({
   taskList,
   setRestModal,
-  setEndRestModal
+  setEndRestModal,
+  setEditTaskModal
 }: {
   taskList: ITask[];
   setRestModal: Function;
   setEndRestModal: Function;
+  setEditTaskModal: Function
 }) => {
   const [tasks, setTasks] = useState([]);
 
@@ -90,9 +93,14 @@ const Carrosel = ({
   }, []);
   return (
     <Slider {...settings}>
-      {taskList?.map(({ _id, name }) => {
-        return <TaskCard name={name} id={_id} setRestModal={setRestModal} setEndRestModal={setEndRestModal} />;
+      {taskList?.map(({ _id, name,checked }) => {
+        return <TaskCard name={name} id={_id} setRestModal={setRestModal} 
+        setEndRestModal={setEndRestModal} checked= {checked} 
+        setEditTaskModal ={setEditTaskModal}
+        />;
+        
       })}
+     
     </Slider>
   );
 };

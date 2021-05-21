@@ -7,12 +7,14 @@ import CategoryModal from "../../Components/Modal/CategoryModal";
 import EditCategoryModal from "../../Components/Modal/EditCategoryModal";
 import VerifyModal from "../../Components/Modal/VerifyModal";
 import RestModal from "../../Components/Modal/RestModal";
+import EditTaskModal from "../../Components/Modal/EditTaskModal";
 
 const Aplicaçao: React.FC = () => {
   const [category, setCategory] = useState([]);
   const [taskModal, setTaskModal] = useState(false);
   const [categoryModal, setCategoryModal] = useState(false);
   const [editCategoryModal, setEditCategoryModal] = useState(false);
+  const [editTaskyModal, setEditTaskModal] = useState(false);
   const [verifyModal, setVerifyModal] = useState(false);
   const [restModal, setRestModal] = useState(false);
   const [endRestModal, setEndRestModal] = useState(false);
@@ -70,6 +72,24 @@ const Aplicaçao: React.FC = () => {
       console.log(error.message);
     }
   };
+  const updateTask = async (name: string, _id: string) => {
+    try {
+      await api.put(`/tasks/${_id}`, {
+        name: name,
+      });
+      window.location.reload();
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+  const deleteTask = async (_id: string) => {
+    try {
+      await api.delete(`/tasks/${_id}`);
+      window.location.reload();
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
 
   const deleteCategory = async (_id: string) => {
     try {
@@ -87,7 +107,7 @@ const Aplicaçao: React.FC = () => {
   return (
     <div className="backgroundApp">
       <div className="container">
-        {taskModal || categoryModal || editCategoryModal ? (
+        {taskModal || categoryModal || editCategoryModal||editTaskyModal ||restModal||endRestModal  ? (
           <div className="backgroundModal" />
         ) : null}
 
@@ -119,12 +139,13 @@ const Aplicaçao: React.FC = () => {
           <header className="header-content">Olá Pessoa!</header>
 
           <div className="content-app">
-            {category?.map(({ _id, name, tasks }) => {
+            {category?.map(({ _id, name, tasks, checked}) => {
               return (
                 <Lista
                   name={name}
                   setRestModal={setRestModal}
                   setEndRestModal={setEndRestModal}
+                  setEditTaskModal ={setEditTaskModal}
                   tasks={tasks}
                   setEditCategoryModal={setEditCategoryModal}
                   setCategoryId={() => {
@@ -178,6 +199,14 @@ const Aplicaçao: React.FC = () => {
 
             {restModal ? <RestModal setRestModal={setRestModal} title="Vai descansar porra" setEndRestModal={setEndRestModal} /> : null}
             {endRestModal ? <RestModal setRestModal={setRestModal} title="Vai trabalhar porra" setEndRestModal={setEndRestModal} /> : null}
+            {editTaskyModal ? <EditTaskModal 
+              categoryId={categoryId}
+              categoryName={categoryName}
+              setCategoryName={setCategoryName}
+              updateTask={updateTask}
+              deleteTask={deleteTask}
+              setEditTaskModal={setEditTaskModal}
+               /> :null}
           </div>
         </div>
       </div>

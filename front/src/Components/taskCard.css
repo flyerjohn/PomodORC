@@ -1,0 +1,89 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap');
+
+.card-wrapper{
+    position: relative;
+    width: 100%;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+.card{
+    width: 100%;
+    height: 130px;  /*= tamanho heigth dos cards =*/
+    border-radius: 29px;
+    overflow: hidden;
+    cursor: pointer;
+    position: relative;
+}
+
+.card-task{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index:2;
+    background: linear-gradient(180deg, #BF4226 100%, #AD2D10 100%);
+    transition: 6s;
+    padding: 10px;
+}
+
+
+.card-title{
+    margin-top:2%;
+    margin-left: 2%;
+    opacity: 1;
+}
+.card-title:hover{
+    
+    opacity: 0.8;
+}
+
+
+.card-title {
+    text-transform:uppercase;
+    font-family: 'Montserrat', sans-serif;
+    font-weight:500;
+    letter-spacing: -0.06em;
+    font-size: 3vh;
+}
+
+.card:hover{    /*= animaçao que sobe o card =*/
+        transform: translateY( -1.5px );
+        transition: all .2s;
+}
+
+.main-container{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.timer-container{
+    color: #E5E5E5;
+    display: flex;
+    letter-spacing: 3px;
+    font-size: 1.2rem;
+    margin-top: 8%;
+}
+
+.timer-container span{
+    position: relative;
+    top: 5px;
+}
+
+.timer-text{
+    margin: 0;
+}
+.checkBox{
+    width: 1.3em;
+    height: 1.3em;
+    background-color: white;
+    border-radius: 50%;
+    vertical-align: middle;
+    border: 1px solid #ddd;
+ 
+    outline: none;
+    cursor: pointer;
+}

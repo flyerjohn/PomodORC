@@ -24,7 +24,7 @@ const Controls = (props:Props) => {
     return (
         <div className='controls-container'>
             <button onClick={playButton} disabled={running}><IoPlayOutline /></button>
-            <button onClick={stopButton}><IoStopOutline /></button>
+            <button onClick={stopButton}><IoPauseOutline /></button>
             <button onClick={resetButton} disabled={running}><IoRepeatOutline /></button>
         </div>
     );

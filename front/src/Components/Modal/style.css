@@ -17,6 +17,11 @@
     align-items: center;
     margin-top:1.5rem;
 }
+@media (max-width: 600px){
+    .taskModal{
+        width: 70%;
+    }
+}
 
 .taskModal h1{
     margin-top: 0rem;
@@ -48,6 +53,12 @@
     align-items: center;
     margin-top: 1.5rem;
     text-align: center;
+}
+
+@media (max-width: 600px){
+    .restModal{
+        width: 100%;
+    }
 }
 
 .restModal h1 {

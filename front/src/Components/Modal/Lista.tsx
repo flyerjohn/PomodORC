@@ -11,13 +11,15 @@ interface ITask{
 }
 
 
-const Lista = ({name, tasks, setEditCategoryModal, setCategoryId,setRestModal,setEndRestModal}:{
+const Lista = ({name, tasks, setEditCategoryModal, setCategoryId,setRestModal,setEndRestModal,setEditTaskModal,setTaskId}:{
     name: string,
     tasks: ITask[],
     setEditCategoryModal: Function,
     setCategoryId: Function,
     setRestModal: Function,
-    setEndRestModal: Function
+    setEndRestModal: Function,
+    setEditTaskModal: Function,
+    setTaskId: Function,
 
 }) => {
     return (
@@ -26,7 +28,9 @@ const Lista = ({name, tasks, setEditCategoryModal, setCategoryId,setRestModal,se
             <h1 className="listTitle"> {name} </h1>
             <FiEdit className= "editListIcon" onClick= {() => {setEditCategoryModal (true);setCategoryId()}}/>
         </div>
-            <Carrosel taskList={tasks} setRestModal={setRestModal} setEndRestModal={setEndRestModal}/>
+            <Carrosel taskList={tasks} setRestModal={setRestModal} 
+            setEndRestModal={setEndRestModal} setEditTaskModal ={setEditTaskModal}
+            setTaskId= {setTaskId}/>
        
         </>
     );

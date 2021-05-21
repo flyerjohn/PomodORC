@@ -7,19 +7,24 @@ import CategoryModal from "../../Components/Modal/CategoryModal";
 import EditCategoryModal from "../../Components/Modal/EditCategoryModal";
 import VerifyModal from "../../Components/Modal/VerifyModal";
 import RestModal from "../../Components/Modal/RestModal";
+import EditTaskModal from "../../Components/Modal/EditTaskModal";
+import VerifyTaskModal from "../../Components/Modal/VerifyTaskModal";
 
 const Aplicaçao: React.FC = () => {
   const [category, setCategory] = useState([]);
   const [taskModal, setTaskModal] = useState(false);
   const [categoryModal, setCategoryModal] = useState(false);
   const [editCategoryModal, setEditCategoryModal] = useState(false);
+  const [editTaskyModal, setEditTaskModal] = useState(false);
   const [verifyModal, setVerifyModal] = useState(false);
+  const [verifyTaskModal, setVerifyTaskModal] = useState(false);
   const [restModal, setRestModal] = useState(false);
   const [endRestModal, setEndRestModal] = useState(false);
   const [categoryValue, setCategoryValue] = useState<string>("");
   const [taskName, setTaskName] = useState("");
   const [categoryName, setCategoryName] = useState("");
   const [categoryId, setCategoryId] = useState("");
+  const [taskId, setTaskId] = useState("");
 
   function onChangeSelect(value: string) {
     setCategoryValue(value);
@@ -70,6 +75,24 @@ const Aplicaçao: React.FC = () => {
       console.log(error.message);
     }
   };
+  const updateTask = async ( _id: string) => {
+    try {
+      await api.put(`/tasks/${_id}`, {
+        name: taskName,
+      });
+      window.location.reload();
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+  const deleteTask = async (_id: string) => {
+    try {
+      await api.delete(`/tasks/${_id}`);
+      window.location.reload();
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
 
   const deleteCategory = async (_id: string) => {
     try {
@@ -87,7 +110,8 @@ const Aplicaçao: React.FC = () => {
   return (
     <div className="backgroundApp">
       <div className="container">
-        {taskModal || categoryModal || editCategoryModal || restModal || endRestModal ? (
+
+        {taskModal || categoryModal || editCategoryModal || restModal||endRestModal||editTaskyModal  ? (
           <div className="backgroundModal" />
         ) : null}
 
@@ -119,12 +143,14 @@ const Aplicaçao: React.FC = () => {
           <header className="header-content">Olá Pessoa!</header>
 
           <div className="content-app">
-            {category?.map(({ _id, name, tasks }) => {
+            {category?.map(({ _id, name, tasks, checked}) => {
               return (
                 <Lista
                   name={name}
                   setRestModal={setRestModal}
                   setEndRestModal={setEndRestModal}
+                  setEditTaskModal ={setEditTaskModal}
+                  setTaskId= {setTaskId}
                   tasks={tasks}
                   setEditCategoryModal={setEditCategoryModal}
                   setCategoryId={() => {
@@ -146,6 +172,17 @@ const Aplicaçao: React.FC = () => {
                 onChangeSelect={onChangeSelect}
               />
             ) : null}
+            {editTaskyModal ? <EditTaskModal 
+              name={categoryName}
+              _id={categoryId}
+              setVerifyModal={setVerifyTaskModal}
+              categoryValue={taskId}
+              category={category}
+              setEditTaskModal={setEditTaskModal}
+              setTaskName={setTaskName}
+              updateTask={updateTask}
+              onChangeSelect={onChangeSelect}
+               /> :null}
 
             {categoryModal ? (
               <CategoryModal
@@ -175,9 +212,18 @@ const Aplicaçao: React.FC = () => {
                 deleteCategory={deleteCategory}
               />
             ) : null}
+            {verifyTaskModal ? (
+              <VerifyTaskModal
+                setEditTaskModal={setEditTaskModal}
+                setVerifyTaskModal={setVerifyTaskModal}
+                taskId={taskId}
+                deleteTask={deleteTask}
+              />
+            ) : null}
 
             {restModal ? <RestModal setRestModal={setRestModal} title="Descanso!" setEndRestModal={setEndRestModal} /> : null}
             {endRestModal ? <RestModal setRestModal={setRestModal} title="Fim do Descanso!" setEndRestModal={setEndRestModal} /> : null}
+
           </div>
         </div>
       </div>

@@ -1,6 +1,6 @@
 import React, { MouseEventHandler, useEffect, useState } from 'react';
 import './Controlsss.css';
-import { IoPlayOutline, IoStopOutline, IoRepeatOutline } from 'react-icons/io5';
+import { IoPlayOutline, IoPauseOutline, IoRepeatOutline } from 'react-icons/io5';
 
 
 type Props = {

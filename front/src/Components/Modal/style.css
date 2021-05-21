@@ -31,6 +31,37 @@
     color:#fff;
 }
 
+.restModal {
+    background:linear-gradient(180deg, #18273D 5%, #111d2e 100%);
+    font-family: 'Roboto', sans-serif;
+    border-color:#0E1826;
+    border-style: solid;
+    justify-content: space-around;
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    top: 25%;
+    border-radius: 29px;
+    height: 40%;
+    width: 35%;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 1.5rem;
+    text-align: center;
+}
+
+.restModal h1 {
+    font-size: 1.5rem;
+    margin-bottom: 1.7rem;
+    letter-spacing: 1px;
+}
+
+.alarm {
+    width: 60%;
+    height: 60%;
+    opacity: 0.5;
+}
+
 .createButton{
     background-color: #BF4226;
     border:none;
@@ -82,6 +113,21 @@
 }
 
 .closeTaskIcon:hover,.closeCategoryIcon:hover{
+    opacity:1;
+    color: crimson;
+    cursor: pointer;
+}
+
+.closeCategoryIconTimer{
+    margin-top: 1rem;
+    margin-right: 3vh;
+    display: flex;
+    align-self: flex-end;
+    font-size: 1.5rem;
+    opacity: 1; transition: 0.3s;
+}
+
+.closeTaskIconTimer:hover,.closeCategoryIconTimer:hover{
     opacity:1;
     color: crimson;
     cursor: pointer;
@@ -166,4 +212,11 @@
 }
 .separate{
     padding: 1rem;
+}
+
+@media (max-width: 600px){
+    .restModal{
+        height: 40%;
+        width: 45%;
+    }
 }

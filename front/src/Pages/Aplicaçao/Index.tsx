@@ -110,6 +110,7 @@ const Aplicaçao: React.FC = () => {
   return (
     <div className="backgroundApp">
       <div className="container">
+
         {taskModal || categoryModal || editCategoryModal || restModal||endRestModal||editTaskyModal  ? (
           <div className="backgroundModal" />
         ) : null}
@@ -220,9 +221,9 @@ const Aplicaçao: React.FC = () => {
               />
             ) : null}
 
-            {restModal ? <RestModal setRestModal={setRestModal} title="Vai descansar porra" setEndRestModal={setEndRestModal} /> : null}
-            {endRestModal ? <RestModal setRestModal={setRestModal} title="Vai trabalhar porra" setEndRestModal={setEndRestModal} /> : null}
-            
+            {restModal ? <RestModal setRestModal={setRestModal} title="Descanso!" setEndRestModal={setEndRestModal} /> : null}
+            {endRestModal ? <RestModal setRestModal={setRestModal} title="Fim do Descanso!" setEndRestModal={setEndRestModal} /> : null}
+
           </div>
         </div>
       </div>

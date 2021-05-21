@@ -9,7 +9,6 @@ type Props = {
     playButton: MouseEventHandler<HTMLButtonElement>,
     stopButton: MouseEventHandler<HTMLButtonElement>,
     resetButton: MouseEventHandler<HTMLButtonElement>,
-    /*setTimeInSecondsDescanso: Function*/
 };
 
 const Controls = (props:Props) => {
@@ -25,8 +24,8 @@ const Controls = (props:Props) => {
     return (
         <div className='controls-container'>
             <button onClick={playButton} disabled={running}><IoPlayOutline /></button>
-            <button onClick={stopButton}><IoPauseOutline /></button>
-            <button onClick={resetButton}><IoRepeatOutline /></button>
+            <button onClick={stopButton}><IoStopOutline /></button>
+            <button onClick={resetButton} disabled={running}><IoRepeatOutline /></button>
         </div>
     );
 }

@@ -110,7 +110,7 @@ const Aplicaçao: React.FC = () => {
   return (
     <div className="backgroundApp">
       <div className="container">
-        {taskModal || categoryModal || editCategoryModal||editTaskyModal ||restModal||endRestModal  ? (
+        {taskModal || categoryModal || editCategoryModal || restModal||endRestModal||editTaskyModal  ? (
           <div className="backgroundModal" />
         ) : null}
 

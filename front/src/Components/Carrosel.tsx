@@ -96,6 +96,7 @@ const Carrosel = ({
   }, []);
   return (
     <Slider {...settings}>
+      
       {taskList?.map(({ _id, name,checked }) => {
         
         return <TaskCard name={name} id={_id} setRestModal={setRestModal} 

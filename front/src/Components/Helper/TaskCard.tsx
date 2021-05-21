@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import calculateTimer from "../../Components/Helper/CalculateTime";
 import Controls from "../../Components/Controls";
 import "../../Components/taskCard.css";
+import "../../Components/Modal/style.css";
 import api from "../../services/api";
 
 interface TaskCardProps {
@@ -90,7 +91,7 @@ const TaskCard = ({ name, id, setRestModal, setEndRestModal, checked, setEditTas
   return (
     <>
     <div className="card-wrapper" key={id}>
-     
+    
       <div className="card" >
         <div className="card-task">
           <div className="row">
